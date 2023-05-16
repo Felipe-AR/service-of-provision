@@ -1,0 +1,177 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_HOST")
+}
+
+model State {
+  id      Int    @id @default(autoincrement())
+  name    String
+  acronym String
+  City    City[]
+
+  @@map("states")
+}
+
+model City {
+  id      Int       @id @default(autoincrement())
+  name    String
+  stateId Int
+  state   State     @relation(fields: [stateId], references: [id])
+  Address Address[]
+
+  @@map("cities")
+}
+
+model Address {
+  id         Int      @id @default(autoincrement())
+  street     String
+  num        String
+  district   String
+  complement String
+  cep        String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  cityId     Int
+  userId     String?
+  city       City     @relation(fields: [cityId], references: [id])
+  User       User?    @relation(fields: [userId], references: [id])
+
+  @@map("addresses")
+}
+
+enum Role {
+  CUSTOMER
+  SERVICE_PROVIDER
+  ADMINISTRATOR
+}
+
+model User {
+  id              String           @id @default(uuid())
+  email           String           @unique
+  password        String
+  phone           String
+  addresses       Address[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  role            Role
+  Customer        Customer?
+  ServiceProvider ServiceProvider?
+
+  @@map("users")
+}
+
+model Customer {
+  userId  String  @id
+  name    String
+  surname String
+  rg      String
+  cpf     String
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Order   Order[]
+
+  @@map("customers")
+}
+
+model CoreBusiness {
+  id              String            @id @default(uuid())
+  name            String
+  description     String?
+  ServiceProvider ServiceProvider[]
+
+  @@map("core_business")
+}
+
+model Speciality {
+  id                    String           @id @default(uuid())
+  name                  String
+  description           String?
+  serviceProviderUserId String?
+  ServiceProvider       ServiceProvider? @relation(fields: [serviceProviderUserId], references: [userId])
+
+  @@map("specialities")
+}
+
+model ServiceProvider {
+  userId         String       @id
+  companyName    String
+  cnpj           String
+  coreBusinessId String
+  specialities   Speciality[]
+  coreBusiness   CoreBusiness @relation(fields: [coreBusinessId], references: [id])
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Service        Service[]
+  Order          Order[]
+
+  @@map("service_providers")
+}
+
+model Category {
+  id          String    @id @default(uuid())
+  name        String
+  description String?
+  Service     Service[]
+
+  @@map("categories")
+}
+
+enum ServiceStatus {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+}
+
+model Service {
+  id                    String          @id @default(uuid())
+  name                  String
+  price                 Float
+  categoryId            String
+  status                ServiceStatus   @default(ACTIVE)
+  orders                Order[]         @relation("orders_services")
+  serviceProviderUserId String
+  category              Category        @relation(fields: [categoryId], references: [id])
+  serviceProvider       ServiceProvider @relation(fields: [serviceProviderUserId], references: [userId])
+
+  @@map("services")
+}
+
+enum OrderStatus {
+  CREATED
+  ACCEPTED
+  DENIED
+  COMPLETED
+}
+
+model Order {
+  id                    String           @id @default(uuid())
+  customerUserId        String
+  serviceProviderUserId String
+  services              Service[]        @relation("orders_services")
+  status                OrderStatus
+  price                 Float
+  createdAt             DateTime         @default(now())
+  updatedAt             DateTime         @updatedAt
+  customer              Customer         @relation(fields: [customerUserId], references: [userId])
+  service               ServiceProvider  @relation(fields: [serviceProviderUserId], references: [userId])
+  Classification        Classification[]
+
+  @@map("orders")
+}
+
+model Classification {
+  id                          String   @default(uuid())
+  userClassificationCreatedId String
+  userClassificationRatedId   String
+  rating                      Int
+  description                 String?
+  createdAt                   DateTime
+  updatedAt                   DateTime
+  orderId                     String
+  Order                       Order    @relation(fields: [orderId], references: [id])
+
+  @@id([id, userClassificationCreatedId, userClassificationRatedId])
+  @@map("classifications")
+}
