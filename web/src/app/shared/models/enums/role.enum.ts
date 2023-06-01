@@ -1,0 +1,5 @@
+export enum Role {
+  CUSTOMER,
+  SERVICE_PROVIDER,
+  ADMINISTRATOR
+}
