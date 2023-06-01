@@ -11,13 +11,9 @@ export class Category {
   public readonly id: string;
   private properties: CategoryProperties;
 
-  private constructor(properties: CategoryProperties, id?: string) {
+  public constructor(properties: CategoryProperties, id?: string) {
     this.id = id ?? randomUUID();
     this.properties = properties;
-  }
-
-  public static create(properties: CategoryProperties, id?: string): Category {
-    return new Category(properties, id);
   }
 
   get name(): string {
