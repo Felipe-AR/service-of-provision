@@ -16,7 +16,7 @@ export class CreateCategoryUseCase {
   async execute(
     request: CreateCategoryRequest,
   ): Promise<CreateCategoryResponse> {
-    const category = Category.create(request);
+    const category = new Category(request);
     await this.categoryRepository.create(category);
     return { category };
   }

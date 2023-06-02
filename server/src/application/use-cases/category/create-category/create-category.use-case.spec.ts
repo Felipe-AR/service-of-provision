@@ -13,6 +13,8 @@ describe('Create Category', () => {
     const response = await useCase.execute(request);
     const categories = await repository.findAll();
 
+    expect(categories).toHaveLength(1);
+
     const input = categories[0].object;
     const output = response.category.object;
 
