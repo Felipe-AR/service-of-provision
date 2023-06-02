@@ -5,7 +5,7 @@ export interface CategoryProperties {
   description?: string;
 }
 
-// type CategoryObject = CategoryProperties & { id: string };
+export type CategoryObject = CategoryProperties & { id: string };
 
 export class Category {
   public readonly id: string;
@@ -32,7 +32,7 @@ export class Category {
     this.properties.description = description;
   }
 
-  get object() {
+  get object(): CategoryObject {
     return {
       id: this.id,
       ...this.properties,

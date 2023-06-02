@@ -13,6 +13,8 @@ export interface AddressProperties {
   updatedAt?: Date;
 }
 
+export type AddressObject = AddressProperties & { id: string };
+
 export class Address {
   public readonly id: string;
   private properties: AddressProperties;
@@ -100,5 +102,12 @@ export class Address {
 
   set updatedAt(updatedAt: Date) {
     this.properties.updatedAt = updatedAt;
+  }
+
+  get object(): AddressObject {
+    return {
+      id: this.id,
+      ...this.properties,
+    };
   }
 }
