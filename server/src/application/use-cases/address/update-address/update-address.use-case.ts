@@ -1,5 +1,7 @@
 import { AddressRepository } from '@application/repositories/address/address.repository';
-import { FindAddressUseCase } from '../find-address/find-address.use-case';
+import { ObjectNotFoundException } from '@application/exceptions/object-not-found.exception';
+import { Address } from '@application/domain/address/address.entity';
+import { Injectable } from '@nestjs/common';
 
 interface UpdateAddressUseCaseRequest {
   id: string;
@@ -15,20 +17,23 @@ interface UpdateAddressUseCaseRequest {
 
 type UpdateAddressUseCaseResponse = void;
 
+@Injectable()
 export class UpdateAddressUseCase {
-  constructor(
-    private addressRepository: AddressRepository,
-    private findAddressUseCase: FindAddressUseCase,
-  ) {}
+  constructor(private addressRepository: AddressRepository) {}
 
   async execute(
     request: UpdateAddressUseCaseRequest,
   ): Promise<UpdateAddressUseCaseResponse> {
     const { id, ...updatedAddress } = request;
 
-    await Promise.all([
-      this.findAddressUseCase.execute({ id }),
-      this.addressRepository.update(id, updatedAddress),
-    ]);
+    const address = await this.addressRepository.findById(id);
+
+    if (!address) {
+      throw new ObjectNotFoundException('This address was not found');
+    }
+
+    await this.addressRepository.save(
+      new Address({ ...updatedAddress }, address.id),
+    );
   }
 }

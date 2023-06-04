@@ -1,5 +1,6 @@
 import { CategoryRepository } from '@application/repositories/category/category.repository';
 import { FindCategoryUseCase } from '../find-category/find-category.use-case';
+import { Injectable } from '@nestjs/common';
 
 interface DeleteCategoryUseCaseRequest {
   id: string;
@@ -7,6 +8,7 @@ interface DeleteCategoryUseCaseRequest {
 
 type DeleteCategoryUseCaseResponse = void;
 
+@Injectable()
 export class DeleteCategoryUseCase {
   constructor(
     private categoryRepository: CategoryRepository,

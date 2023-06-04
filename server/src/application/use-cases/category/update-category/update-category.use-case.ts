@@ -1,6 +1,7 @@
 import { CategoryRepository } from '@application/repositories/category/category.repository';
-import { FindCategoryUseCase } from '../find-category/find-category.use-case';
 import { Category } from '@application/domain/category/category.entity';
+import { ObjectNotFoundException } from '@application/exceptions/object-not-found.exception';
+import { Injectable } from '@nestjs/common';
 
 export interface UpdateCategoryUseCaseRequest {
   id: string;
@@ -10,20 +11,23 @@ export interface UpdateCategoryUseCaseRequest {
 
 type UpdateCategoryUseCaseResponse = void;
 
+@Injectable()
 export class UpdateCategoryUseCase {
-  constructor(
-    private categoryRepository: CategoryRepository,
-    private findCategoryUseCase: FindCategoryUseCase,
-  ) {}
+  constructor(private categoryRepository: CategoryRepository) {}
 
   async execute(
     request: UpdateCategoryUseCaseRequest,
   ): Promise<UpdateCategoryUseCaseResponse> {
     const { id, ...updatedCategory } = request;
 
-    await Promise.all([
-      this.findCategoryUseCase.execute({ id }),
-      this.categoryRepository.update(id, updatedCategory),
-    ]);
+    const category = await this.categoryRepository.findById(id);
+
+    if (!category) {
+      throw new ObjectNotFoundException('This category was not found');
+    }
+
+    await this.categoryRepository.save(
+      new Category({ ...updatedCategory }, id),
+    );
   }
 }

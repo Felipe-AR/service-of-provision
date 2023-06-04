@@ -1,5 +1,6 @@
 import { Address } from '@application/domain/address/address.entity';
 import { AddressRepository } from '@application/repositories/address/address.repository';
+import { Injectable } from '@nestjs/common';
 
 export interface CreateAddressUseCaseRequest {
   userId: string;
@@ -16,6 +17,7 @@ export interface CreateAddressUseCaseResponse {
   address: Address;
 }
 
+@Injectable()
 export class CreateAddressUseCase {
   constructor(private addressRepository: AddressRepository) {}
 
