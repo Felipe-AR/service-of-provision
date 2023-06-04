@@ -1,13 +1,10 @@
-import {
-  Address,
-  AddressProperties,
-} from '@application/domain/address/address.entity';
+import { Address } from '@application/domain/address/address.entity';
 
-export interface AddressRepository {
-  findAll(): Promise<Address[]>;
-  findById(id: string): Promise<Address>;
-  findAllByUserId(userId: string): Promise<Address[]>;
-  create(address: Address): Promise<Address>;
-  update(id: string, address: AddressProperties): Promise<void>;
-  delete(id: string): Promise<void>;
+export abstract class AddressRepository {
+  abstract findAll(): Promise<Address[]>;
+  abstract findById(id: string): Promise<Address>;
+  abstract findAllByUserId(userId: string): Promise<Address[]>;
+  abstract create(address: Address): Promise<Address>;
+  abstract save(address: Address): Promise<void>;
+  abstract delete(id: string): Promise<void>;
 }
