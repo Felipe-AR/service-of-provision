@@ -17,7 +17,7 @@ export class CreateCategoryUseCase {
     request: CreateCategoryRequest,
   ): Promise<CreateCategoryResponse> {
     const category = new Category(request);
-    await this.categoryRepository.create(category);
-    return { category };
+    const createdCategory = await this.categoryRepository.create(category);
+    return { category: createdCategory };
   }
 }

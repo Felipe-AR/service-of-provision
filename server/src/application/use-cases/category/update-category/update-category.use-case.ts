@@ -21,7 +21,7 @@ export class UpdateCategoryUseCase {
   ): Promise<UpdateCategoryUseCaseResponse> {
     const { id, ...updatedCategory } = request;
 
-    Promise.all([
+    await Promise.all([
       this.findCategoryUseCase.execute({ id }),
       this.categoryRepository.update(id, updatedCategory),
     ]);
