@@ -24,16 +24,19 @@ export class InMemoryAddressRepository implements AddressRepository {
     return address;
   }
 
-  async update(id: string, updatedAddress: AddressProperties): Promise<void> {
-    const index = this.addresses.map((address) => address.id).indexOf(id);
-    const addressAlreadyCreated = await this.findById(id);
+  async save(updatedAddress: Address): Promise<void> {
+    const index = this.addresses
+      .map((address) => address.id)
+      .indexOf(updatedAddress.id);
+
+    const addressAlreadyCreated = await this.findById(updatedAddress.id);
 
     this.addresses[index] = new Address(
       {
         ...addressAlreadyCreated['properties'],
-        ...updatedAddress,
+        ...updatedAddress['properties'],
       },
-      id,
+      addressAlreadyCreated.id,
     );
   }
 

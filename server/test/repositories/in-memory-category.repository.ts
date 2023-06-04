@@ -19,16 +19,19 @@ export class InMemoryCategoryRepository implements CategoryRepository {
     return category;
   }
 
-  async update(id: string, updatedCategory: CategoryProperties): Promise<void> {
-    const index = this.categories.map((category) => category.id).indexOf(id);
-    const categoryAlreadyCreated = await this.findById(id);
+  async save(updatedCategory: Category): Promise<void> {
+    const index = this.categories
+      .map((category) => category.id)
+      .indexOf(updatedCategory.id);
+
+    const categoryAlreadyCreated = await this.findById(updatedCategory.id);
 
     this.categories[index] = new Category(
       {
         ...categoryAlreadyCreated['properties'],
-        ...updatedCategory,
+        ...updatedCategory['properties'],
       },
-      id,
+      categoryAlreadyCreated.id,
     );
   }
 
