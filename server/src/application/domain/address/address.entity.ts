@@ -9,8 +9,6 @@ export interface AddressProperties {
   city: string;
   state: string;
   zipCode: string;
-  createdAt?: Date;
-  updatedAt?: Date;
 }
 
 export type AddressObject = AddressProperties & { id: string };
@@ -86,22 +84,6 @@ export class Address {
 
   set zipCode(zipCode: string) {
     this.properties.zipCode = zipCode;
-  }
-
-  get createdAt(): Date {
-    return this.properties.createdAt;
-  }
-
-  set createdAt(createdAt: Date) {
-    this.properties.createdAt = createdAt;
-  }
-
-  get updatedAt(): Date {
-    return this.properties.updatedAt;
-  }
-
-  set updatedAt(updatedAt: Date) {
-    this.properties.updatedAt = updatedAt;
   }
 
   get object(): AddressObject {
