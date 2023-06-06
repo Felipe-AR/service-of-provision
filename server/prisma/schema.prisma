@@ -7,38 +7,17 @@ datasource db {
   url      = env("DATABASE_HOST")
 }
 
-model State {
-  id      Int    @id @default(autoincrement())
-  name    String
-  acronym String
-  City    City[]
-
-  @@map("states")
-}
-
-model City {
-  id      Int       @id @default(autoincrement())
-  name    String
-  stateId Int
-  state   State     @relation(fields: [stateId], references: [id])
-  Address Address[]
-
-  @@map("cities")
-}
-
 model Address {
-  id         Int      @id @default(autoincrement())
+  id         String  @id @default(uuid())
   street     String
   num        String
   district   String
   complement String
-  cep        String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  cityId     Int
+  city       String
+  state      String
+  zipCode    String
   userId     String?
-  city       City     @relation(fields: [cityId], references: [id])
-  User       User?    @relation(fields: [userId], references: [id])
+  User       User?   @relation(fields: [userId], references: [id])
 
   @@map("addresses")
 }
