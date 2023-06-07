@@ -2,6 +2,7 @@ import { Address } from '@application/domain/address/address.entity';
 import { Role } from '@application/domain/user/role.enum';
 import { User } from '@application/domain/user/user.entity';
 import { UserRepository } from '@application/repositories/user/user.repository';
+import { Injectable } from '@nestjs/common';
 
 interface CreateUserUseCaseRequest {
   email: string;
@@ -16,6 +17,7 @@ interface CreateUserUseCaseResponse {
   user: User;
 }
 
+@Injectable()
 export class CreateUserUseCase {
   constructor(private userRepository: UserRepository) {}
 
