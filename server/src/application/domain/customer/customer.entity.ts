@@ -1,11 +1,11 @@
 import { randomUUID } from 'crypto';
-import { Genre } from './genre.enum';
+import { Gender } from './gender.enum';
 
 export interface CustomerProperties {
   userId: string;
   name: string;
   surname: string;
-  genre: Genre;
+  gender: Gender;
   cpf: string;
   rg: string;
 }
@@ -19,6 +19,14 @@ export class Customer {
   constructor(properties: CustomerProperties, id?: string) {
     this.id = id ?? randomUUID();
     this.properties = properties;
+  }
+
+  get userId(): string {
+    return this.properties.userId;
+  }
+
+  set userId(userId: string) {
+    this.properties.userId = userId;
   }
 
   get name(): string {
@@ -37,12 +45,12 @@ export class Customer {
     this.properties.surname = surname;
   }
 
-  get genre(): Genre {
-    return this.properties.genre;
+  get gender(): Gender {
+    return this.properties.gender;
   }
 
-  set genre(genre: Genre) {
-    this.properties.genre = genre;
+  set gender(gender: Gender) {
+    this.properties.gender = gender;
   }
 
   get cpf(): string {
@@ -57,7 +65,14 @@ export class Customer {
     return this.properties.rg;
   }
 
-  set rg(genre: string) {
-    this.properties.rg = genre;
+  set rg(rg: string) {
+    this.properties.rg = rg;
+  }
+
+  get object(): CustomerObject {
+    return {
+      id: this.id,
+      ...this.properties,
+    };
   }
 }
