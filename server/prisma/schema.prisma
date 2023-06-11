@@ -12,11 +12,11 @@ model Address {
   street     String
   num        String
   district   String
-  complement String
+  complement String?
   city       String
   state      String
   zipCode    String
-  userId     String?
+  userId     String
   User       User?   @relation(fields: [userId], references: [id])
 
   @@map("addresses")
@@ -43,12 +43,19 @@ model User {
   @@map("users")
 }
 
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
 model Customer {
   userId  String  @id
   name    String
   surname String
   rg      String
   cpf     String
+  gender  Gender
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   Order   Order[]
 
