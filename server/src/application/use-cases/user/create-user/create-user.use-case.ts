@@ -1,4 +1,3 @@
-import { Address } from '@application/domain/address/address.entity';
 import { Role } from '@application/domain/user/role.enum';
 import { User } from '@application/domain/user/user.entity';
 import { EmailAlreadyExistsException } from '@application/exceptions/email-already-exists.exception';
