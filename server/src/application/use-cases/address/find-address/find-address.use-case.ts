@@ -1,4 +1,5 @@
 import { Address } from '@application/domain/address/address.entity';
+import { ObjectNotFoundException } from '@application/exceptions/object-not-found.exception';
 import { AddressRepository } from '@application/repositories/address/address.repository';
 import { Injectable } from '@nestjs/common';
 
@@ -19,6 +20,11 @@ export class FindAddressUseCase {
   ): Promise<FindAddressUseCaseResponse> {
     const { id } = request;
     const address = await this.addressRepository.findById(id);
+
+    if (!address) {
+      throw new ObjectNotFoundException('Address was not found.');
+    }
+
     return { address };
   }
 }
