@@ -8,11 +8,17 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   Post,
   Put,
 } from '@nestjs/common';
 import { CategoryForm } from '../forms/category.form';
+import {
+  CategoryDTO,
+  CategoryViewModel,
+} from '../view-models/category-view-model';
 
 @Controller('category')
 export class CategoryController {
@@ -25,31 +31,37 @@ export class CategoryController {
   ) {}
 
   @Get()
+  @HttpCode(HttpStatus.OK)
   public async findAllCategories() {
     const { categories } = await this.findAllCategoriesUseCase.execute();
-    return categories;
+    return categories.map(CategoryViewModel.toHTTP);
   }
 
   @Get(':id')
-  public async findCategory(@Param('id') id: string) {
+  @HttpCode(HttpStatus.OK)
+  public async findCategory(@Param('id') id: string): Promise<CategoryDTO> {
     const { category } = await this.findCategoryUseCase.execute({ id });
-    return category;
+    return CategoryViewModel.toHTTP(category);
   }
 
   @Post()
-  public async createCategory(@Body() categoryForm: CategoryForm) {
+  @HttpCode(HttpStatus.CREATED)
+  public async createCategory(
+    @Body() categoryForm: CategoryForm,
+  ): Promise<CategoryDTO> {
     const { category } = await this.createCategoryUseCase.execute({
       ...categoryForm,
     });
 
-    return category;
+    return CategoryViewModel.toHTTP(category);
   }
 
   @Put(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   public async updateCategory(
     @Param('id') id: string,
     @Body() categoryForm: CategoryForm,
-  ) {
+  ): Promise<void> {
     await this.updateCategoryUseCase.execute({
       id,
       ...categoryForm,
@@ -57,7 +69,8 @@ export class CategoryController {
   }
 
   @Delete(':id')
-  public async deleteCategory(@Param('id') id: string) {
+  @HttpCode(HttpStatus.NO_CONTENT)
+  public async deleteCategory(@Param('id') id: string): Promise<void> {
     await this.deleteCategoryUseCase.execute({ id });
   }
 }
