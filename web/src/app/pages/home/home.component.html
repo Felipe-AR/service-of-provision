@@ -1,0 +1,62 @@
+<section class="po-p-5" [style]="{
+  'min-height': '100vh',
+  'display': 'flex', 
+  'justify-content': 'center', 
+  'flex-direction': 'column'
+}">
+
+  <div class="po-mb-5">
+    <font class="po-font-display">Ajudaê | Serviços</font>
+    <br />
+    <font class="po-font-subtitle">Plataforma de Prestação e Contratação de Serviços</font>
+  </div>
+
+  <po-container>
+    <div class="po-mb-2">
+      <font class="po-font-text-large-bold">
+        Prosseguir com o acesso na Plataforma.
+      </font>
+    </div>
+
+    <div class="po-row">
+      <div class="po-mb-2 po-xl-6 po-md-12 po-sm-12 po-p-0">
+        <div class="po-mb-2">
+          <po-email p-label="E-mail" [p-no-autocomplete]="true"></po-email>
+          <po-password p-label="Senha" [p-no-autocomplete]="true"></po-password>
+        </div>
+
+        <div [style]="{ 
+          'display': 'flex', 
+          'justify-content': 'end', 
+          'gap': '0.5rem' 
+        }">
+          <po-button 
+            class="po-lg-3 po-p-0" 
+            p-label="Confirmar" 
+            p-kind="primary"
+            p-icon="fa fa-check-circle">
+          </po-button>
+
+          <po-button 
+            class="po-lg-3 po-p-0" 
+            p-label="Criar Conta" 
+            p-kind="secondary" 
+            p-icon="fa fa-plus-circle"
+            [routerLink]="['/register']">
+          </po-button>
+        </div>
+      </div>
+      <div class="po-mb-2 po-xl-6 po-md-12 po-sm-12 po-pl-xl-5 po-pr-xl-5">
+        <po-slide
+          [p-hide-arrows]="true"
+          draggable="false"
+          [p-slides]="[
+            'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80', 
+            'https://images.unsplash.com/photo-1620050382792-434b5828873d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1112&q=80',
+            'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
+          ]">
+        </po-slide>
+      </div>
+    </div>
+  </po-container>
+</section>

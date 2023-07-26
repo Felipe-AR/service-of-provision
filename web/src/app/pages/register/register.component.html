@@ -1,0 +1,30 @@
+<section class="po-p-5">
+
+  <div class="po-mb-2">
+    <font class="po-font-title">Cadastrar Usuário</font>
+    <br />
+
+    <po-button p-label="Voltar" p-icon="fa fa-arrow-left" p-kind="primary" [routerLink]="['/']"></po-button>
+  </div>
+
+
+  <po-container>
+
+    <div class="po-mb-2 po-text-center">
+      <font class="po-p-2 po-font-text-smaller">
+        Por favor, escolher o tipo de usuário se será Cliente ou Prestador de Serviço.
+      </font>
+    </div>
+
+    <po-tabs [ngSwitch]="">
+      <po-tab p-label="Cliente" [p-active]="true">
+        <app-register-customer></app-register-customer>
+      </po-tab>
+      <po-tab p-label="Prestador de Serviço">
+        <app-register-service-provider></app-register-service-provider>
+      </po-tab>
+    </po-tabs>
+
+  </po-container>
+
+</section>
