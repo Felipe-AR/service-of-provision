@@ -1,5 +1,5 @@
 import { Customer } from '@application/domain/customer/customer.entity';
-import { Gender } from '@prisma/client';
+import { Gender } from '@application/domain/customer/gender.enum';
 
 export interface CustomerDTO {
   userId: string;
