@@ -8,6 +8,7 @@ import {
 } from '../create-user/create-user.use-case';
 import { Gender } from '@application/domain/customer/gender.enum';
 import { Role } from '@application/domain/user/role.enum';
+import { User } from '@application/domain/user/user.entity';
 
 interface CreateCustomerUserUseCaseRequest
   extends Omit<CreateUserUseCaseRequest, 'role'> {
@@ -19,7 +20,7 @@ interface CreateCustomerUserUseCaseRequest
 }
 
 interface CreateCustomerUserUseCaseResponse {
-  customer: Customer;
+  user: User;
 }
 
 @Injectable()
@@ -33,26 +34,23 @@ export class CreateCustomerUserUseCase {
     request: CreateCustomerUserUseCaseRequest,
   ): Promise<CreateCustomerUserUseCaseResponse> {
     const { user } = await this.createUserUseCase.execute({
-      email: request.email,
-      password: request.password,
-      phone: request.phone,
+      ...request,
       role: Role.CUSTOMER,
-      addresses: request.addresses,
-      createdAt: request.createdAt,
-      updatedAt: request.updatedAt,
     });
 
-    const customer = new Customer({
-      userId: user.id,
-      name: request.name,
-      surname: request.surname,
-      gender: request.gender,
-      cpf: request.cpf,
-      rg: request.rg,
-    });
+    const customer = new Customer(
+      {
+        name: request.name,
+        surname: request.surname,
+        gender: request.gender,
+        cpf: request.cpf,
+        rg: request.rg,
+      },
+      user.id,
+    );
 
-    const createdCustomer = await this.customerRepository.create(customer);
+    await this.customerRepository.create(customer);
 
-    return { customer: createdCustomer };
+    return { user };
   }
 }
