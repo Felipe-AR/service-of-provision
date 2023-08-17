@@ -1,0 +1,27 @@
+<div class="po-wrapper">
+  <po-menu [p-collapsed]="false" [p-menus]="menus">
+    <div *p-menu-header-template class="po-p-2">
+      <p>
+        <span class="po-font-title">Olá,</span>
+        <br>
+        <span class="po-font-subtitle"><strong>Felipe Ribeiro</strong>.</span>
+        <br>
+      </p>
+      <p class="po-text-color-primary po-font-text-small-bold po-text-right">{{ greetingsMessage() }}!</p>
+    </div>
+  </po-menu>
+
+  <po-toolbar p-title="Ajudaê | Dashboard Cliente" [p-show-notification]="true"></po-toolbar>
+
+  <router-outlet></router-outlet>
+</div>
+
+<po-modal
+  [p-hide-close]="true"
+  [p-primary-action]="primaryModalAction"
+  [p-secondary-action]="secondaryModalAction"
+  p-icon="po-icon po-icon-exit"
+  p-title="Log out"
+>
+  <p class="font-text-large">Você realmente deseja sair da sua conta?</p>
+</po-modal>
