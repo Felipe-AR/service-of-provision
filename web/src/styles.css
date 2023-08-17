@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+*:not(.po-icon) {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.po-menu {
+  background: #F5F5F5;
+}
+
+.po-container:not(.po-accordion, .po-widget-header + po-container > .po-container) {
+  background: #F5F5F5 !important;
+}
+
+.po-divider-label {
+  font-weight: 600;
+}
+
+.po-tab-button-label,
+.po-widget-header,
+.po-menu-icon-label,
+.po-tag-title,
+.po-breadcrumb-label,
+.po-toolbar-title,
+.po-info-label {
+  font-size: .875rem !important;
+  font-weight: 600;
+}
+
+.po-accordion-item-header-button.po-clickable::before {
+  display: none;
+}
