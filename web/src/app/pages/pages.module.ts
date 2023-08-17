@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { HomeModule } from './home/home.module';
 import { RegisterModule } from './register/register.module';
-import { ViaCepService } from '../shared/services/via-cep.service';
 import { RegisterComponent } from './register/register.component';
 import {
   PoContainerModule,
@@ -25,7 +24,7 @@ import { DashboardServiceProviderModule } from './dashboard/dashboard-service-pr
     PoContainerModule,
     RegisterModule,
   ],
-  providers: [ViaCepService],
+  providers: [],
   exports: [RegisterComponent],
 })
 export class PagesModule {}
