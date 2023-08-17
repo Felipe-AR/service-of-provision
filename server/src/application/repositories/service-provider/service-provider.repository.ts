@@ -1,11 +1,15 @@
-import { ServiceProvider } from '@application/domain/service-provider/service-provider.entity';
 import { Injectable } from '@nestjs/common';
+
+import { ServiceProvider } from '@application/domain/service-provider/service-provider.entity';
+import { ServiceProviderMapper } from '@application/mappers/service-provider-mapper';
 
 @Injectable()
 export abstract class ServiceProviderRepository {
-  abstract findByUser(id: string): Promise<ServiceProvider | null>;
-  abstract findAll(): Promise<ServiceProvider[]>;
-  abstract create(serviceProvider: ServiceProvider): Promise<ServiceProvider>;
+  abstract findByUser(userId: string): Promise<ServiceProviderMapper | null>;
+  abstract findAll(): Promise<ServiceProviderMapper[]>;
+  abstract create(
+    serviceProvider: ServiceProvider,
+  ): Promise<ServiceProviderMapper>;
   abstract save(serviceProvider: ServiceProvider): Promise<void>;
-  abstract delete(id: string): Promise<void>;
+  abstract delete(userId: string): Promise<void>;
 }
