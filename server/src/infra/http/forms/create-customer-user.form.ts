@@ -27,5 +27,5 @@ export class CreateCustomerUserForm {
   @IsNotEmpty()
   cpf: string;
 
-  addresses: Omit<AddressForm, 'userId'>[];
+  address: Omit<AddressForm, 'userId'>;
 }
