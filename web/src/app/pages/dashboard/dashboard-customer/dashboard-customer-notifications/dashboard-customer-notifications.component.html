@@ -1,2 +1,16 @@
 <po-page-default p-title="Notificações" [p-breadcrumb]="breadcrumb">
+  <po-list-view
+    p-property-title="name"
+    [p-items]="notifications"
+    [p-actions]="actions"
+  >
+    <ng-template p-list-view-content-template let-item>
+      <div class="po-row">
+        <po-info class="po-xl-4 po-md-6 po-sm-12" p-label="ID" [p-value]="item.id"></po-info>
+        <po-info class="po-xl-4 po-md-6 po-sm-12" p-label="Criado Em" [p-value]="item.createdAt.toLocaleString()"></po-info>
+        <po-info class="po-xl-4 po-md-6 po-sm-12" p-label="Lido Em" [p-value]="item.readAt.toLocaleString()"></po-info>
+        <po-info class="po-md-12 po-mt-2" p-label="Descrição" [p-value]="item.description"></po-info>
+      </div>
+    </ng-template>
+  </po-list-view>
 </po-page-default>
