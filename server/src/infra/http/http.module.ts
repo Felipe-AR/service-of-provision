@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+
 import { CategoryController } from './controllers/category.controller';
 import { CreateCategoryUseCase } from '@application/use-cases/category/create-category/create-category.use-case';
 import { DatabaseModule } from '@infra/database/database.module';
@@ -18,10 +19,27 @@ import { CreateCustomerUserUseCase } from '@application/use-cases/user/create-cu
 import { UserController } from './controllers/user.controller';
 import { FindAllUsersUseCase } from '@application/use-cases/user/find-all-users/find-all-users.use-case';
 import { FindUserUseCase } from '@application/use-cases/user/find-user/find-user.use-case';
+import { ServiceProviderController } from './controllers/service-provider.controller';
+import { SecurityModule } from '@infra/security/security.module';
+import { AuthController } from './controllers/auth.controller';
+import { CreateServiceProviderUserUseCase } from '@application/use-cases/user/create-service-provider-user/create-service-provider-user.use-case';
+import { CoreBusinessController } from './controllers/core-business.controller';
+import { CreateCoreBusinessUseCase } from '@application/use-cases/core-business/create-core-business/create-core-business.use-case';
+import { FindAllCoreBusinessesUseCase } from '@application/use-cases/core-business/find-all-core-businesses/find-all-core-businesses.use-case';
+import { FindCoreBusinessUseCase } from '@application/use-cases/core-business/find-core-business/find-core-business.use-case';
+import { FindAllServiceProvidersUseCase } from '@application/use-cases/service-provider/find-all-service-providers/find-all-service-providers.use-case';
+import { FindServiceProviderUseCase } from '@application/use-cases/service-provider/find-service-provider/find-service-provider.use-case';
 
 @Module({
-  imports: [DatabaseModule],
-  controllers: [CategoryController, AddressController, UserController],
+  imports: [DatabaseModule, SecurityModule],
+  controllers: [
+    AuthController,
+    CategoryController,
+    AddressController,
+    UserController,
+    ServiceProviderController,
+    CoreBusinessController,
+  ],
   providers: [
     CreateCategoryUseCase,
     FindCategoryUseCase,
@@ -38,6 +56,12 @@ import { FindUserUseCase } from '@application/use-cases/user/find-user/find-user
     CreateCustomerUserUseCase,
     FindAllUsersUseCase,
     FindUserUseCase,
+    CreateServiceProviderUserUseCase,
+    CreateCoreBusinessUseCase,
+    FindCoreBusinessUseCase,
+    FindAllCoreBusinessesUseCase,
+    FindAllServiceProvidersUseCase,
+    FindServiceProviderUseCase,
   ],
 })
 export class HttpModule {}
