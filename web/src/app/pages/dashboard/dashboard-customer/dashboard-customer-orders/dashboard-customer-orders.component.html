@@ -1,3 +1,61 @@
 <po-page-default p-title="Pedidos" [p-breadcrumb]="breadcrumb">
-
+  <po-table
+    [p-auto-collapse]="true"
+    [p-hide-columns-manager]="true"
+    [p-items]="orders"
+    [p-sort]="true"
+    [p-striped]="true"
+    [p-columns]="tableColumns"
+    [p-actions]="tableActions"
+    [p-actions-right]="true"
+  >
+  </po-table>
 </po-page-default>
+
+<po-modal
+  #orderDetailModal
+  [p-hide-close]="true"
+  p-icon="po-icon-eye"
+  [p-title]="'Pedido: ' + selectedOrder.id" 
+  >
+
+  <po-dynamic-view
+    [p-fields]="dynamicOrderFields"
+    [p-value]="selectedOrderFlattened">
+  </po-dynamic-view>
+
+  <div class="po-mt-2">
+    <po-accordion>
+      <po-accordion-item p-label="Serviços">
+        <div class="po-md-12 po-text-center po-font-text" *ngIf="selectedOrder.services && !selectedOrder.services.length">
+          <strong>Nenhum dado foi encontrado.</strong>
+        </div>
+        <div class="po-mb-0" *ngFor="let service of selectedOrder.services">
+          <po-info class="po-lg-10" p-label="Serviço" [p-value]="service.name" ></po-info>
+          <po-info class="po-lg-2" p-label="Preço" [p-value]="formatServicePriceToPoInfo(service.price)" ></po-info>
+        </div>
+        
+        <po-divider></po-divider>
+        
+        <div>
+          <po-info class="po-offset-xl-10 po-offset-sm-4 po-lg-2 po-sm-2" p-label="Total" [p-value]="formatServicePriceToPoInfo(selectedOrder.price)"></po-info>
+        </div>
+      </po-accordion-item>
+    </po-accordion>
+  </div>  
+</po-modal>
+
+<po-modal
+  #orderRateFormModal
+  [p-hide-close]="true"
+  p-icon="po-icon-star"
+  [p-title]="'Pedido: ' + selectedOrder.id"
+  [p-primary-action]="primaryActionRateModal"
+  [p-secondary-action]="secondaryActionRateModal">
+
+  <po-dynamic-form
+    (p-form)="getRateOrderForm($event)"
+    [p-fields]="dynamicRatingFormFields">
+  </po-dynamic-form>
+
+</po-modal>
