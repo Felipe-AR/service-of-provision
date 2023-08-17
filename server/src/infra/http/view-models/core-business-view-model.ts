@@ -1,22 +1,17 @@
-import { CoreBusiness } from '@application/domain/core-business/core-business.entity';
-import { Gender } from '@prisma/client';
+import { CoreBusiness } from '@application/domain';
 
 export interface CoreBusinessDTO {
-  coreBusinessId: string;
-  companyName: string;
-  cnpj: string;
-  speciality?: Speciality[];
-  services?: Service[];
+  id: string;
+  name: string;
+  description: string;
 }
 
 export class CoreBusinessViewModel {
-  static toHTTP(serviceProvider: CoreBusiness): CoreBusinessDTO {
+  static toHTTP(coreBusiness: CoreBusiness) {
     return {
-      coreBusinessId: serviceProvider.coreBusinessId;
-      companyName: string;
-      cnpj: string;
-      speciality?: Speciality[];
-      services?: Service[];
+      id: coreBusiness.id,
+      name: coreBusiness.name,
+      description: coreBusiness.description,
     };
   }
 }
