@@ -15,13 +15,15 @@ export class PrismaCustomerMapper {
   }
 
   static toDomain(rawCustomer: RawCustomer): Customer {
-    return new Customer({
-      userId: rawCustomer.userId,
-      name: rawCustomer.name,
-      surname: rawCustomer.surname,
-      rg: rawCustomer.rg,
-      cpf: rawCustomer.cpf,
-      gender: PrismaGenderMapper.toDomain(rawCustomer.gender),
-    });
+    return new Customer(
+      {
+        name: rawCustomer.name,
+        surname: rawCustomer.surname,
+        rg: rawCustomer.rg,
+        cpf: rawCustomer.cpf,
+        gender: PrismaGenderMapper.toDomain(rawCustomer.gender),
+      },
+      rawCustomer.userId,
+    );
   }
 }
