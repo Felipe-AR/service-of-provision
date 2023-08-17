@@ -6,16 +6,16 @@ export interface ServiceProviderProperties {
   coreBusinessId: string;
   companyName: string;
   cnpj: string;
-  speciality?: Speciality[];
+  specialities?: Speciality[];
   services?: Service[];
 }
 
 export class ServiceProvider {
-  public readonly id: string;
+  public readonly userId: string;
   private properties: ServiceProviderProperties;
 
   constructor(properties: ServiceProviderProperties, id?: string) {
-    this.id = id ?? randomUUID();
+    this.userId = id ?? randomUUID();
     this.properties = properties;
   }
 
@@ -43,12 +43,12 @@ export class ServiceProvider {
     this.properties.cnpj = cnpj;
   }
 
-  public get speciality(): Speciality[] {
-    return this.properties.speciality;
+  public get specialities(): Speciality[] {
+    return this.properties.specialities;
   }
 
-  public set speciality(speciality: Speciality[]) {
-    this.properties.speciality = speciality;
+  public set specialities(specialities: Speciality[]) {
+    this.properties.specialities = specialities;
   }
 
   public get services(): Service[] {

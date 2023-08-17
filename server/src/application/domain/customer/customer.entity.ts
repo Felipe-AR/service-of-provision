@@ -2,7 +2,6 @@ import { randomUUID } from 'crypto';
 import { Gender } from './gender.enum';
 
 export interface CustomerProperties {
-  userId: string;
   name: string;
   surname: string;
   gender: Gender;
@@ -13,20 +12,12 @@ export interface CustomerProperties {
 export type CustomerObject = CustomerProperties & { id: string };
 
 export class Customer {
-  public readonly id: string;
+  public readonly userId: string;
   private properties: CustomerProperties;
 
   constructor(properties: CustomerProperties, id?: string) {
-    this.id = id ?? randomUUID();
+    this.userId = id ?? randomUUID();
     this.properties = properties;
-  }
-
-  get userId(): string {
-    return this.properties.userId;
-  }
-
-  set userId(userId: string) {
-    this.properties.userId = userId;
   }
 
   get name(): string {
@@ -71,7 +62,7 @@ export class Customer {
 
   get object(): CustomerObject {
     return {
-      id: this.id,
+      id: this.userId,
       ...this.properties,
     };
   }
