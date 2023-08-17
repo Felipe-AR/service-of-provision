@@ -8,7 +8,11 @@ import { PrismaAddressRepository } from './prisma/repositories/prisma-address.re
 import { UserRepository } from '@application/repositories/user/user.repository';
 import { PrismaUserRepository } from './prisma/repositories/prisma-user-repository';
 import { CustomerRepository } from '@application/repositories/customer/customer.repository';
-import { PrismaCustomerRepository } from './prisma/repositories/prisma-customer-repository';
+import { PrismaCustomerRepository } from './prisma/repositories/prisma-customer.repository';
+import { ServiceProviderRepository } from '@application/repositories/service-provider/service-provider.repository';
+import { PrismaServiceProviderRepository } from './prisma/repositories/prisma-service-provider.repository';
+import { CoreBusinessRepository } from '@application/repositories/core-business/core-business.repository';
+import { PrismaCoreBusinessRepository } from './prisma/repositories';
 
 @Module({
   providers: [
@@ -29,12 +33,22 @@ import { PrismaCustomerRepository } from './prisma/repositories/prisma-customer-
       provide: CustomerRepository,
       useClass: PrismaCustomerRepository,
     },
+    {
+      provide: ServiceProviderRepository,
+      useClass: PrismaServiceProviderRepository,
+    },
+    {
+      provide: CoreBusinessRepository,
+      useClass: PrismaCoreBusinessRepository,
+    },
   ],
   exports: [
     CategoryRepository,
     AddressRepository,
     UserRepository,
     CustomerRepository,
+    ServiceProviderRepository,
+    CoreBusinessRepository,
   ],
 })
 export class DatabaseModule {}
