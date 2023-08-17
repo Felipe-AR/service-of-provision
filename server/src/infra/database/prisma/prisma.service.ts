@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client';
 export class PrismaService extends PrismaClient implements OnModuleInit {
   constructor() {
     super({
-      log: ['query'],
+      // log: ['query'],
     });
   }
 
@@ -13,8 +13,6 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
   }
 
   async enableShutdownHooks(app: INestApplication) {
-    this.$on('beforeExit', async () => {
-      await app.close;
-    });
+    this.$on('beforeExit', async () => app.close);
   }
 }
