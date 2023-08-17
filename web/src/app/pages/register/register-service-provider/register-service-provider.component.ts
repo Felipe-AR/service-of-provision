@@ -8,7 +8,7 @@ import { lastValueFrom } from 'rxjs';
 import { CreateCustomerUserForm } from 'src/app/shared/forms/create-customer-user.form';
 import { Address } from 'src/app/shared/models';
 import { GENDER_OPTIONS } from 'src/app/shared/models/enums/gender.enum';
-import { ViaCepService } from 'src/app/shared/services/via-cep.service';
+import { ViaCepService } from 'src/app/shared/services/via-cep/via-cep.service';
 
 @Component({
   selector: 'app-register-service-provider',

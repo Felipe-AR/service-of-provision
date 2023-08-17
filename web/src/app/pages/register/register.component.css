@@ -1,0 +1,39 @@
+.po-display-flex {
+  display: flex;
+}
+
+.po-align-items-center {
+  align-items: center;
+}
+
+.po-justify-content-center {
+  justify-content: center;
+}
+
+.po-flex-direction-column {
+  flex-direction: column;
+}
+
+.po-gap-1 {
+  gap: .5rem;
+}
+
+.po-gap-2 {
+  gap: 1rem;
+}
+
+.po-gap-3 {
+  gap: 2rem;
+}
+
+.po-gap-4 {
+  gap: 4rem;
+}
+
+.po-gap-5 {
+  gap: 8rem;
+}
+
+.po-overlaid-shadow {
+  box-shadow: 4px 3px 5px 2px rgba(32, 32, 32, .25);
+}

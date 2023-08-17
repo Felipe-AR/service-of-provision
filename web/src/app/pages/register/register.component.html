@@ -1,30 +1,34 @@
 <section class="po-p-5">
 
-  <div class="po-mb-2">
-    <font class="po-font-title">Cadastrar Usuário</font>
-    <br />
+  <po-button class="po-mb-2" p-label="Voltar" p-icon="fa fa-arrow-left" p-kind="tertiary" [routerLink]="['/']"></po-button>
 
-    <po-button p-label="Voltar" p-icon="fa fa-arrow-left" p-kind="primary" [routerLink]="['/']"></po-button>
-  </div>
+  <div class="po-container po-display-flex po-align-items-center po-justify-content-center po-flex-direction-column po-gap-2" [style]="{
+    '--padding': '1rem',
+    '--border-radius': 'var(--border-radius-md)', 
+    '--background': 'var(--color-neutral-light-00)',
+    '--border-color': 'var(--color-neutral-light-20)',
+    '--border-width': 'var(--border-width-sm)',
+    'height': '650px'}">
 
+    <h1 class="po-font-title po-text-center">
+      <strong>Por favor, escolher um dos tipos abaixo que você gostaria de ser!</strong>
+    </h1>
 
-  <po-container>
-
-    <div class="po-mb-2 po-text-center">
-      <font class="po-p-2 po-font-text-smaller">
-        Por favor, escolher o tipo de usuário se será Cliente ou Prestador de Serviço.
-      </font>
+    <div class="po-display-flex po-justify-content-center po-gap-2">
+      <po-button 
+        class="po-overlaid-shadow" 
+        p-size="medium" 
+        p-kind="primary" 
+        p-label="Eu gostaria de ser cliente" 
+        [routerLink]="['/register/customer']">
+      </po-button>
+      <po-button 
+        class="po-overlaid-shadow" 
+        p-size="medium" 
+        p-kind="secondary" 
+        p-label="Eu gostaria de ser prestador de serviço"
+        [routerLink]="['/register/service-provider']">
+      </po-button>
     </div>
-
-    <po-tabs [ngSwitch]="">
-      <po-tab p-label="Cliente" [p-active]="true">
-        <app-register-customer></app-register-customer>
-      </po-tab>
-      <po-tab p-label="Prestador de Serviço">
-        <app-register-service-provider></app-register-service-provider>
-      </po-tab>
-    </po-tabs>
-
-  </po-container>
-
+  </div>
 </section>

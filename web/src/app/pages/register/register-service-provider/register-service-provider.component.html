@@ -1,158 +1,165 @@
-<form #customerForm="ngForm">
-  <div class="po-row">
+<section class="po-p-5">
 
-    <po-divider class="po-xl-12" p-label="Dados Pessoais">
-    </po-divider>
+  <po-button class="po-mb-2" p-label="Voltar" p-icon="fa fa-arrow-left" p-kind="tertiary" [routerLink]="['/register']"></po-button>
 
-    <po-input 
-      [(ngModel)]="createCustomerUserForm.name"
-      name="name"
-      class="po-xl-6"
-      p-label="Nome"
-      [p-minlength]="5"
-      [p-show-required]="true">
-    </po-input>
-
-    <po-input 
-      [(ngModel)]="createCustomerUserForm.surname"
-      name="surname"
-      class="po-xl-6"
-      p-label="Sobrenome"
-      p-required="true">
-    </po-input>
-
-    <po-email 
-      [(ngModel)]="createCustomerUserForm.email"
-      name="email"
-      class="po-xl-6"
-      p-label="E-mail"
-      p-required="true">
-    </po-email>
-
-    <po-password 
-      [(ngModel)]="createCustomerUserForm.password"
-      name="password"
-      class="po-xl-6"
-      p-label="Senha"
-      p-required="true">
-    </po-password>
-
-    <po-select
-      [ngModel]="createCustomerUserForm.gender"
-      (ngModelChange)="createCustomerUserForm.gender = $event"
-      name="gender"
-      class="po-xl-3"
-      p-label="Gênero"
-      [p-options]="genderOptions"
-      [p-required]="true">
-    </po-select>
-
-    <po-input 
-      [(ngModel)]="createCustomerUserForm.rg"
-      name="rg"
-      class="po-xl-3"
-      p-label="RG"
-      p-mask="99.999.999-9"
-      p-required="true">
-    </po-input>
-
-    <po-input 
-      [(ngModel)]="createCustomerUserForm.cpf"
-      name="cpf"
-      class="po-xl-3"
-      p-label="CPF"
-      p-mask="999.999.999.99"
-      p-required="true">
-    </po-input>
-
-    <po-input 
-      [(ngModel)]="createCustomerUserForm.phone"
-      name="phone"
-      class="po-xl-3"
-      p-label="Phone"
-      p-icon="fa fa-phone"
-      p-mask="(99) 99999-9999"
-      p-required="true">
-    </po-input>
-
-    <po-divider class="po-mt-2 po-xl-12" p-label="Endereço"></po-divider>
-
-    <div class="po-mb-2 po-xl-12 po-p-0">
-      <po-input 
-        [(ngModel)]="customerAddress.zipCode"
-        name="zipCode"
-        (p-blur)="findAddressByZipCode(customerZipCodeInput, customerAddress)"
-        class="po-xl-2 po-lg-2 po-sm-4" p-label="CEP" p-mask="99999-999"
-        p-required="true"
-        p-icon="fa-solid fa-location-dot"
-        p-error-pattern="Campo inválido"
-        #customerZipCodeInput>
-      </po-input>
-    </div>
-
-    <po-input 
-      [(ngModel)]="customerAddress.street" 
-      name="street"
-      p-disabled="true"
-      class="po-xl-6 po-lg-8 po-md-10 po-sm-12" 
-      p-label="Logradouro"
-      p-required="true">
-    </po-input>
-
-    <po-input 
-      [(ngModel)]="customerAddress.num" 
-      name="num"
-      [p-disabled]="!isZipCodeConsulted + ''" 
-      class="po-xl-2 po-lg-4 po-md-2 po-sm-12" 
-      p-label="Número"
-      p-required="true">
-    </po-input>
-
-    <po-input 
-      [(ngModel)]="customerAddress.complement" 
-      name="complement"
-      [p-disabled]="!isZipCodeConsulted + ''" 
-      class="po-xl-4 po-lg-6 po-md-6 po-sm-12" 
-      p-label="Complemento"
-      [p-optional]="true">
-    </po-input>
-
-    <po-input 
-      [(ngModel)]="customerAddress.district" 
-      name="district"
-      p-disabled="true"
-      class="po-xl-5 po-lg-6 po-md-6 po-sm-12" 
-      p-label="Bairro"
-      p-required="true">
-    </po-input>
-
-    <po-input 
-      [(ngModel)]="customerAddress.city" 
-      name="city"
-      p-disabled="true"
-      class="po-xl-5 po-lg-8 po-md-8 po-sm-12" 
-      p-label="Cidade"
-      p-required="true">
-    </po-input>
-
-    <po-input 
-      [(ngModel)]="customerAddress.state" 
-      name="state"
-      p-disabled="true"
-      class="po-xl-2 po-lg-4 po-md-4 po-sm-12" 
-      p-label="UF"
-      p-required="true">
-    </po-input>
-
-  </div>
-
-  <div class="po-xl-12">
-    <po-button 
-      p-kind="primary" 
-      p-icon="fa fa-check" 
-      p-label="Realizar Cadastro" 
-      [p-disabled]="customerForm.form.invalid || !isZipCodeConsulted"
-      (p-click)="createCustomer(customerForm)">
-    </po-button>
-  </div>
-</form>
+  <po-container>
+    <form #customerForm="ngForm">
+      <div class="po-row">
+    
+        <po-divider class="po-xl-12" p-label="Dados Pessoais">
+        </po-divider>
+    
+        <po-input 
+          [(ngModel)]="createCustomerUserForm.name"
+          name="name"
+          class="po-xl-6"
+          p-label="Nome"
+          [p-minlength]="5"
+          [p-show-required]="true">
+        </po-input>
+    
+        <po-input 
+          [(ngModel)]="createCustomerUserForm.surname"
+          name="surname"
+          class="po-xl-6"
+          p-label="Sobrenome"
+          p-required="true">
+        </po-input>
+    
+        <po-email 
+          [(ngModel)]="createCustomerUserForm.email"
+          name="email"
+          class="po-xl-6"
+          p-label="E-mail"
+          p-required="true">
+        </po-email>
+    
+        <po-password 
+          [(ngModel)]="createCustomerUserForm.password"
+          name="password"
+          class="po-xl-6"
+          p-label="Senha"
+          p-required="true">
+        </po-password>
+    
+        <po-select
+          [ngModel]="createCustomerUserForm.gender"
+          (ngModelChange)="createCustomerUserForm.gender = $event"
+          name="gender"
+          class="po-xl-3"
+          p-label="Gênero"
+          [p-options]="genderOptions"
+          [p-required]="true">
+        </po-select>
+    
+        <po-input 
+          [(ngModel)]="createCustomerUserForm.rg"
+          name="rg"
+          class="po-xl-3"
+          p-label="RG"
+          p-mask="99.999.999-9"
+          p-required="true">
+        </po-input>
+    
+        <po-input 
+          [(ngModel)]="createCustomerUserForm.cpf"
+          name="cpf"
+          class="po-xl-3"
+          p-label="CPF"
+          p-mask="999.999.999.99"
+          p-required="true">
+        </po-input>
+    
+        <po-input 
+          [(ngModel)]="createCustomerUserForm.phone"
+          name="phone"
+          class="po-xl-3"
+          p-label="Phone"
+          p-icon="fa fa-phone"
+          p-mask="(99) 99999-9999"
+          p-required="true">
+        </po-input>
+    
+        <po-divider class="po-mt-2 po-xl-12" p-label="Endereço"></po-divider>
+    
+        <div class="po-mb-2 po-xl-12 po-p-0">
+          <po-input 
+            [(ngModel)]="customerAddress.zipCode"
+            name="zipCode"
+            (p-blur)="findAddressByZipCode(customerZipCodeInput, customerAddress)"
+            class="po-xl-2 po-lg-2 po-sm-4" p-label="CEP" p-mask="99999-999"
+            p-required="true"
+            p-icon="fa-solid fa-location-dot"
+            p-error-pattern="Campo inválido"
+            #customerZipCodeInput>
+          </po-input>
+        </div>
+    
+        <po-input 
+          [(ngModel)]="customerAddress.street" 
+          name="street"
+          p-disabled="true"
+          class="po-xl-6 po-lg-8 po-md-10 po-sm-12" 
+          p-label="Logradouro"
+          p-required="true">
+        </po-input>
+    
+        <po-input 
+          [(ngModel)]="customerAddress.num" 
+          name="num"
+          [p-disabled]="!isZipCodeConsulted + ''" 
+          class="po-xl-2 po-lg-4 po-md-2 po-sm-12" 
+          p-label="Número"
+          p-required="true">
+        </po-input>
+    
+        <po-input 
+          [(ngModel)]="customerAddress.complement" 
+          name="complement"
+          [p-disabled]="!isZipCodeConsulted + ''" 
+          class="po-xl-4 po-lg-6 po-md-6 po-sm-12" 
+          p-label="Complemento"
+          [p-optional]="true">
+        </po-input>
+    
+        <po-input 
+          [(ngModel)]="customerAddress.district" 
+          name="district"
+          p-disabled="true"
+          class="po-xl-5 po-lg-6 po-md-6 po-sm-12" 
+          p-label="Bairro"
+          p-required="true">
+        </po-input>
+    
+        <po-input 
+          [(ngModel)]="customerAddress.city" 
+          name="city"
+          p-disabled="true"
+          class="po-xl-5 po-lg-8 po-md-8 po-sm-12" 
+          p-label="Cidade"
+          p-required="true">
+        </po-input>
+    
+        <po-input 
+          [(ngModel)]="customerAddress.state" 
+          name="state"
+          p-disabled="true"
+          class="po-xl-2 po-lg-4 po-md-4 po-sm-12" 
+          p-label="UF"
+          p-required="true">
+        </po-input>
+    
+      </div>
+    
+      <div class="po-xl-12">
+        <po-button 
+          p-kind="primary" 
+          p-icon="fa fa-check" 
+          p-label="Realizar Cadastro" 
+          [p-disabled]="customerForm.form.invalid || !isZipCodeConsulted"
+          (p-click)="createCustomer(customerForm)">
+        </po-button>
+      </div>
+    </form>
+  </po-container>
+</section>
