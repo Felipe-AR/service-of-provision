@@ -20,31 +20,47 @@
 
     <div class="po-row">
       <div class="po-mb-2 po-xl-6 po-md-12 po-sm-12 po-p-0">
-        <div class="po-mb-2">
-          <po-email p-label="E-mail" [p-no-autocomplete]="true"></po-email>
-          <po-password p-label="Senha" [p-no-autocomplete]="true"></po-password>
-        </div>
+        <form #userLoginForm="ngForm">
+          <div class="po-mb-2">
+              <po-email
+                [(ngModel)]="loginForm.email"
+                name="email"
+                p-label="E-mail"
+                [p-no-autocomplete]="true"
+                p-required="true">
+              </po-email>
+              <po-password
+                [(ngModel)]="loginForm.password"
+                name="password"
+                p-label="Senha"
+                [p-no-autocomplete]="true"
+                p-required="true">
+              </po-password>
+          </div>
+        
+          <div [style]="{ 
+            'display': 'flex', 
+            'justify-content': 'end', 
+            'gap': '0.5rem' 
+          }">
+            <po-button 
+              class="po-lg-3 po-p-0" 
+              p-label="Confirmar" 
+              p-kind="primary"
+              p-icon="fa fa-check-circle"
+              [p-disabled]="userLoginForm.form.invalid"
+              (p-click)="login()">
+            </po-button>
 
-        <div [style]="{ 
-          'display': 'flex', 
-          'justify-content': 'end', 
-          'gap': '0.5rem' 
-        }">
-          <po-button 
-            class="po-lg-3 po-p-0" 
-            p-label="Confirmar" 
-            p-kind="primary"
-            p-icon="fa fa-check-circle">
-          </po-button>
-
-          <po-button 
-            class="po-lg-3 po-p-0" 
-            p-label="Criar Conta" 
-            p-kind="secondary" 
-            p-icon="fa fa-plus-circle"
-            [routerLink]="['/register']">
-          </po-button>
-        </div>
+            <po-button 
+              class="po-lg-3 po-p-0" 
+              p-label="Criar Conta" 
+              p-kind="secondary" 
+              p-icon="fa fa-plus-circle"
+              [routerLink]="['/register']">
+            </po-button>
+          </div>
+        </form>
       </div>
       <div class="po-mb-2 po-xl-6 po-md-12 po-sm-12 po-pl-xl-5 po-pr-xl-5">
         <po-slide

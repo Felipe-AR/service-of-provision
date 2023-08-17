@@ -9,6 +9,7 @@ import {
   PoSlideModule,
 } from '@po-ui/ng-components';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -18,6 +19,7 @@ import { RouterModule } from '@angular/router';
     PoFieldModule,
     PoButtonModule,
     PoSlideModule,
+    FormsModule,
     RouterModule,
   ],
   exports: [HomeComponent],
