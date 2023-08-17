@@ -1,4 +1,4 @@
-import { Gender } from "../models/enums/gender.enum";
+import { Gender } from "../models/enums";
 import { AddressForm } from "./address.form";
 
 export class CreateCustomerUserForm {
@@ -10,9 +10,5 @@ export class CreateCustomerUserForm {
   gender: Gender;
   rg: string;
   cpf: string;
-  addresses: Omit<AddressForm, 'userId'>[];
-
-  constructor() {
-    this.addresses = [];
-  }
+  address: Omit<AddressForm, 'userId'>;
 }
