@@ -1,0 +1,21 @@
+<po-page-default p-title="Perfil" [p-breadcrumb]="breadcrumb">
+  <po-tabs>    
+    <po-tab p-label="Dados pessoais" [p-active]="true">
+
+      <div class="po-row po-mt-2 po-mb-2">
+        <po-button class="po-mr-2" p-kind="primary" p-label="Editar dados"></po-button>
+        <po-button p-kind="secondary" p-label="Alterar senha"></po-button>
+      </div>
+
+      <po-container>
+        <po-dynamic-view class="po-mt-2 po-offset-xl-3 po-xl-9" [p-fields]="dynamicPersonalDataFields" [p-value]="flattenCustomer">
+        </po-dynamic-view>
+      </po-container>
+    </po-tab>
+
+    <po-tab p-label="Endereços"></po-tab>
+  </po-tabs>
+</po-page-default>
+
+<po-modal p-title="Editar dados">
+</po-modal>
