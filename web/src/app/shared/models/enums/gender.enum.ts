@@ -1,4 +1,4 @@
-import { InformationEnum } from "./information.enum";
+import { InformationEnum } from "./";
 
 export enum Gender {
   MALE = 'MALE',
