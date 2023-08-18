@@ -4,6 +4,7 @@ import { ServiceRepository } from '@application/repositories';
 import { FindServiceUseCase } from '../find-service/find-service.use-case';
 import { FindServiceProviderUseCase } from '@application/use-cases/service-provider/find-service-provider/find-service-provider.use-case';
 import { FindCategoryUseCase } from '@application/use-cases/category/find-category/find-category.use-case';
+import { Injectable } from '@nestjs/common';
 
 export interface UpdateServiceUseCaseRequest {
   id: string;
@@ -15,6 +16,7 @@ export interface UpdateServiceUseCaseRequest {
 
 type UpdateServiceUseCaseResponse = void;
 
+@Injectable()
 export class UpdateServiceUseCase {
   constructor(
     private serviceRepository: ServiceRepository,

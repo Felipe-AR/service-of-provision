@@ -1,7 +1,11 @@
 import { ServiceRepository } from '@application/repositories';
 import { FindServiceUseCase } from '../find-service/find-service.use-case';
 import { Service, ServiceStatus } from '@application/domain';
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+} from '@nestjs/common';
 
 export interface ActivateServiceUseCaseRequest {
   id: string;
@@ -21,6 +25,12 @@ export class ActivateServiceUseCase {
   ): Promise<ActivateServiceUseCaseResponse> {
     const { id } = request;
     const { service } = await this.findServiceUseCase.execute({ id });
+
+    if (service.status === ServiceStatus.BLOCKED) {
+      throw new ForbiddenException(
+        'Service is currently blocked and cannot be activated.',
+      );
+    }
 
     await this.serviceRepository.save(
       new Service(
