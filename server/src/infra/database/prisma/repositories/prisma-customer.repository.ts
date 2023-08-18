@@ -8,10 +8,14 @@ import { PrismaCustomerMapper } from '../mappers/prisma-customer-mapper';
 export class PrismaCustomerRepository implements CustomerRepository {
   constructor(private prismaService: PrismaService) {}
 
-  async findByUser(id: string): Promise<Customer> {
+  async findByUser(id: string): Promise<Customer | null> {
     const customer = await this.prismaService.customer.findFirst({
       where: { userId: id },
     });
+
+    if (!customer) {
+      return null;
+    }
 
     return PrismaCustomerMapper.toDomain(customer);
   }
@@ -31,7 +35,11 @@ export class PrismaCustomerRepository implements CustomerRepository {
   }
 
   async save(customer: Customer): Promise<void> {
-    throw new Error('Method not implemented.');
+    const rawCustomer = PrismaCustomerMapper.toDomain(customer);
+    await this.prismaService.customer.update({
+      where: { userId: rawCustomer.userId },
+      data: { ...rawCustomer },
+    });
   }
 
   async delete(id: string): Promise<void> {
