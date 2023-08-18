@@ -1,3 +1,4 @@
+import { ObjectNotFoundException } from '@application/exceptions';
 import { ServiceProviderMapper } from '@application/mappers/service-provider-mapper';
 import { ServiceProviderRepository } from '@application/repositories';
 import { Injectable } from '@nestjs/common';
@@ -19,6 +20,11 @@ export class FindServiceProviderUseCase {
     const serviceProvider = await this.serviceProviderRepository.findByUser(
       userId,
     );
+
+    if (!serviceProvider) {
+      throw new ObjectNotFoundException('Service Provider was not found.');
+    }
+
     return { serviceProvider };
   }
 }
