@@ -5,7 +5,8 @@ import { OrderStatus } from './order-status.enum';
 export interface OrderProperties {
   customerId: string;
   serviceProviderId: string;
-  services: Service[];
+  selectedAddressId: string;
+  services?: Service[];
   status: OrderStatus;
   price: number;
   createdAt?: Date;
@@ -39,6 +40,14 @@ export class Order {
 
   public set serviceProviderId(serviceProviderId: string) {
     this.properties.serviceProviderId = serviceProviderId;
+  }
+
+  public get selectedAddressId(): string {
+    return this.properties.selectedAddressId;
+  }
+
+  public set selectedAddressId(selectedAddressId: string) {
+    this.properties.selectedAddressId = selectedAddressId;
   }
 
   public get services(): Service[] {
