@@ -2,6 +2,7 @@ import { Service } from '@application/domain';
 import { ServiceStatus } from '@prisma/client';
 
 export interface ServiceDTO {
+  id: string;
   serviceProviderId: string;
   categoryId: string;
   name: string;
@@ -12,6 +13,7 @@ export interface ServiceDTO {
 export class ServiceViewModel {
   static toHTTP(service: Service): ServiceDTO {
     return {
+      id: service.id,
       serviceProviderId: service.serviceProviderId,
       categoryId: service.categoryId,
       name: service.name,
