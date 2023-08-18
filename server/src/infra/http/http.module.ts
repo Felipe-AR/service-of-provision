@@ -29,6 +29,14 @@ import { FindAllCoreBusinessesUseCase } from '@application/use-cases/core-busine
 import { FindCoreBusinessUseCase } from '@application/use-cases/core-business/find-core-business/find-core-business.use-case';
 import { FindAllServiceProvidersUseCase } from '@application/use-cases/service-provider/find-all-service-providers/find-all-service-providers.use-case';
 import { FindServiceProviderUseCase } from '@application/use-cases/service-provider/find-service-provider/find-service-provider.use-case';
+import { ServiceController } from './controllers/service.controller';
+import { FindAllServicesUseCase } from '@application/use-cases/service/find-all-services/find-all-services.use-case';
+import { FindServiceUseCase } from '@application/use-cases/service/find-service/find-service.use-case';
+import { ActivateServiceUseCase } from '@application/use-cases/service/activate-service/activate-service.use-case';
+import { InactivateServiceUseCase } from '@application/use-cases/service/inactivate-service/inactive-service.use-case';
+import { BlockServiceUseCase } from '@application/use-cases/service/block-service/block-service.use-case';
+import { CreateServiceUseCase } from '@application/use-cases/service/create-service/create-service.use-case';
+import { UpdateServiceUseCase } from '@application/use-cases/service/update-service/update-service.use-case';
 
 @Module({
   imports: [DatabaseModule, SecurityModule],
@@ -39,6 +47,7 @@ import { FindServiceProviderUseCase } from '@application/use-cases/service-provi
     UserController,
     ServiceProviderController,
     CoreBusinessController,
+    ServiceController,
   ],
   providers: [
     CreateCategoryUseCase,
@@ -62,6 +71,13 @@ import { FindServiceProviderUseCase } from '@application/use-cases/service-provi
     FindAllCoreBusinessesUseCase,
     FindAllServiceProvidersUseCase,
     FindServiceProviderUseCase,
+    FindAllServicesUseCase,
+    FindServiceUseCase,
+    CreateServiceUseCase,
+    UpdateServiceUseCase,
+    ActivateServiceUseCase,
+    InactivateServiceUseCase,
+    BlockServiceUseCase,
   ],
 })
 export class HttpModule {}

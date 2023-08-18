@@ -12,7 +12,11 @@ import { PrismaCustomerRepository } from './prisma/repositories/prisma-customer.
 import { ServiceProviderRepository } from '@application/repositories/service-provider/service-provider.repository';
 import { PrismaServiceProviderRepository } from './prisma/repositories/prisma-service-provider.repository';
 import { CoreBusinessRepository } from '@application/repositories/core-business/core-business.repository';
-import { PrismaCoreBusinessRepository } from './prisma/repositories';
+import {
+  PrismaCoreBusinessRepository,
+  PrismaServiceRepository,
+} from './prisma/repositories';
+import { ServiceRepository } from '@application/repositories';
 
 @Module({
   providers: [
@@ -41,6 +45,10 @@ import { PrismaCoreBusinessRepository } from './prisma/repositories';
       provide: CoreBusinessRepository,
       useClass: PrismaCoreBusinessRepository,
     },
+    {
+      provide: ServiceRepository,
+      useClass: PrismaServiceRepository,
+    },
   ],
   exports: [
     CategoryRepository,
@@ -49,6 +57,7 @@ import { PrismaCoreBusinessRepository } from './prisma/repositories';
     CustomerRepository,
     ServiceProviderRepository,
     CoreBusinessRepository,
+    ServiceRepository,
   ],
 })
 export class DatabaseModule {}
