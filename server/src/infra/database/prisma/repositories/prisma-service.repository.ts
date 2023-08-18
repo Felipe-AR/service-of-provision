@@ -15,6 +15,13 @@ export class PrismaServiceRepository implements ServiceRepository {
     return PrismaServiceMapper.toDomain(service);
   }
 
+  async findAllByIdIn(servicesIds: string[]): Promise<Service[]> {
+    const services = await this.prismaService.service.findMany({
+      where: { id: { in: servicesIds } },
+    });
+    return services.map(PrismaServiceMapper.toDomain);
+  }
+
   async findAll(): Promise<Service[]> {
     const services = await this.prismaService.service.findMany();
     return services.map(PrismaServiceMapper.toDomain);
