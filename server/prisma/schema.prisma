@@ -155,7 +155,7 @@ model Order {
   createdAt             DateTime         @default(now())
   updatedAt             DateTime         @updatedAt
   customer              Customer         @relation(fields: [customerUserId], references: [userId])
-  service               ServiceProvider  @relation(fields: [serviceProviderUserId], references: [userId])
+  serviceProvider       ServiceProvider  @relation(fields: [serviceProviderUserId], references: [userId])
   address               Address          @relation(fields: [selectedAddressId], references: [id])
   Classification        Classification[]
 
