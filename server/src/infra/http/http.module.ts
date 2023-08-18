@@ -37,6 +37,14 @@ import { InactivateServiceUseCase } from '@application/use-cases/service/inactiv
 import { BlockServiceUseCase } from '@application/use-cases/service/block-service/block-service.use-case';
 import { CreateServiceUseCase } from '@application/use-cases/service/create-service/create-service.use-case';
 import { UpdateServiceUseCase } from '@application/use-cases/service/update-service/update-service.use-case';
+import { CreateOrderUseCase } from '@application/use-cases/order/create-order/create-order.use-case';
+import { OrderController } from './controllers/order.controller';
+import { FindCustomerUseCase } from '@application/use-cases/customer/find-customer/find-customer.use-case';
+import { FindAllCustomersUseCase } from '@application/use-cases/customer/find-all-customers/find-all-customers.use-case';
+import { FindAllOrdersUseCase } from '@application/use-cases/order/find-all-orders/find-all-orders.use-case';
+import { FindAllOrdersByServiceProviderUseCase } from '@application/use-cases/order/find-all-orders-by-service-provider/find-all-orders-by-service-provider.use-case';
+import { FindAllOrdersByCustomerUseCase } from '@application/use-cases/order/find-all-orders-by-customer/find-all-oders-by-customer.use-case';
+import { FindOrderUseCase } from '@application/use-cases/order/find-order/find-order.use-case';
 
 @Module({
   imports: [DatabaseModule, SecurityModule],
@@ -48,6 +56,7 @@ import { UpdateServiceUseCase } from '@application/use-cases/service/update-serv
     ServiceProviderController,
     CoreBusinessController,
     ServiceController,
+    OrderController,
   ],
   providers: [
     CreateCategoryUseCase,
@@ -78,6 +87,13 @@ import { UpdateServiceUseCase } from '@application/use-cases/service/update-serv
     ActivateServiceUseCase,
     InactivateServiceUseCase,
     BlockServiceUseCase,
+    CreateOrderUseCase,
+    FindCustomerUseCase,
+    FindAllCustomersUseCase,
+    FindAllOrdersUseCase,
+    FindAllOrdersByCustomerUseCase,
+    FindAllOrdersByServiceProviderUseCase,
+    FindOrderUseCase,
   ],
 })
 export class HttpModule {}

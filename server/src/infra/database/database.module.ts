@@ -17,6 +17,8 @@ import {
   PrismaServiceRepository,
 } from './prisma/repositories';
 import { ServiceRepository } from '@application/repositories';
+import { OrderRepository } from '@application/repositories/order/order.repository';
+import { PrismaOrderRepository } from './prisma/repositories/prisma-order.repository';
 
 @Module({
   providers: [
@@ -49,6 +51,10 @@ import { ServiceRepository } from '@application/repositories';
       provide: ServiceRepository,
       useClass: PrismaServiceRepository,
     },
+    {
+      provide: OrderRepository,
+      useClass: PrismaOrderRepository,
+    },
   ],
   exports: [
     CategoryRepository,
@@ -58,6 +64,7 @@ import { ServiceRepository } from '@application/repositories';
     ServiceProviderRepository,
     CoreBusinessRepository,
     ServiceRepository,
+    OrderRepository,
   ],
 })
 export class DatabaseModule {}
