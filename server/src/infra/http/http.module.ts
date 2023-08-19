@@ -45,6 +45,10 @@ import { FindAllOrdersUseCase } from '@application/use-cases/order/find-all-orde
 import { FindAllOrdersByServiceProviderUseCase } from '@application/use-cases/order/find-all-orders-by-service-provider/find-all-orders-by-service-provider.use-case';
 import { FindAllOrdersByCustomerUseCase } from '@application/use-cases/order/find-all-orders-by-customer/find-all-oders-by-customer.use-case';
 import { FindOrderUseCase } from '@application/use-cases/order/find-order/find-order.use-case';
+import { CustomerController } from './controllers/customer.controller';
+import { AcceptOrderUseCase } from '@application/use-cases/order/accept-order/accept-order.use-case';
+import { DenyOrderUseCase } from '@application/use-cases/order/deny-order/deny-order.use-case';
+import { CompleteOrderUseCase } from '@application/use-cases/order/complete-order/complete-order.use-case';
 
 @Module({
   imports: [DatabaseModule, SecurityModule],
@@ -57,6 +61,7 @@ import { FindOrderUseCase } from '@application/use-cases/order/find-order/find-o
     CoreBusinessController,
     ServiceController,
     OrderController,
+    CustomerController,
   ],
   providers: [
     CreateCategoryUseCase,
@@ -94,6 +99,9 @@ import { FindOrderUseCase } from '@application/use-cases/order/find-order/find-o
     FindAllOrdersByCustomerUseCase,
     FindAllOrdersByServiceProviderUseCase,
     FindOrderUseCase,
+    AcceptOrderUseCase,
+    DenyOrderUseCase,
+    CompleteOrderUseCase,
   ],
 })
 export class HttpModule {}
