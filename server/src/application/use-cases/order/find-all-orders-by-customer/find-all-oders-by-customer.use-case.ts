@@ -28,7 +28,7 @@ export class FindAllOrdersByCustomerUseCase {
     });
 
     const orders = await this.orderRepository.findAllByCustomer(
-      customer.userId,
+      customer.user.id,
     );
 
     return { orders };
