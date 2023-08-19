@@ -1,21 +1,25 @@
 import { Order } from '@application/domain';
 import {
   Order as RawOrder,
-  Customer as RawCustomer,
-  ServiceProvider as RawServiceProvider,
   Service as RawService,
   Address as RawAddress,
 } from '@prisma/client';
 import { PrismaOrderStatusMapper } from './prisma-order-status-mapper';
 import { OrderMapper } from '@application/mappers/order-mapper';
-import { PrismaCustomerMapper } from './prisma-customer-mapper';
-import { PrismaServiceProviderMapper } from './prisma-service-provider.mapper';
+import {
+  PrismaCustomerMapper,
+  RawCustomerWithRelations,
+} from './prisma-customer-mapper';
+import {
+  PrismaServiceProviderMapper,
+  RawServiceProviderWithRelations,
+} from './prisma-service-provider.mapper';
 import { PrismaAddressMapper } from './prisma-address-mapper';
 import { PrismaServiceMapper } from './prisma-service.mapper';
 
 type RawOrderWithRelations = RawOrder & {
-  customer: RawCustomer;
-  serviceProvider: RawServiceProvider;
+  customer: RawCustomerWithRelations;
+  serviceProvider: RawServiceProviderWithRelations;
   address: RawAddress;
   services: RawService[];
 };
@@ -52,8 +56,8 @@ export class PrismaOrderMapper {
   static toDomainWithRelations(rawOrder: RawOrderWithRelations): OrderMapper {
     return new OrderMapper({
       id: rawOrder.id,
-      customer: PrismaCustomerMapper.toDomain(rawOrder.customer),
-      serviceProvider: PrismaServiceProviderMapper.toDomain(
+      customer: PrismaCustomerMapper.toDomainWithRelations(rawOrder.customer),
+      serviceProvider: PrismaServiceProviderMapper.toDomainWithRelations(
         rawOrder.serviceProvider,
       ),
       selectedAddress: PrismaAddressMapper.toDomain(rawOrder.address),

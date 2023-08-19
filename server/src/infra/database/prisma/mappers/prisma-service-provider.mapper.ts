@@ -11,10 +11,10 @@ import {
 import { PrismaServiceMapper } from './prisma-service.mapper';
 import { PrismaSpecialityMapper } from './prisma-speciality.mapper';
 import { PrismaCoreBusinessMapper } from './prisma-core-business-mapper';
-import { PrismaUserMapper } from './prisma-user-mapper';
+import { PrismaUserMapper, RawUserWithRelations } from './prisma-user-mapper';
 
-type RawServiceProviderWithRelations = RawServiceProvider & {
-  user: RawUser & { addresses: RawAddress[] };
+export type RawServiceProviderWithRelations = RawServiceProvider & {
+  user: RawUserWithRelations;
   coreBusiness: RawCoreBusiness;
   services: RawService[];
   specialities: RawSpeciality[];
@@ -45,7 +45,7 @@ export class PrismaServiceProviderMapper {
     rawServiceProvider: RawServiceProviderWithRelations,
   ): ServiceProviderMapper {
     return new ServiceProviderMapper({
-      user: PrismaUserMapper.toDomainWithAddresses(rawServiceProvider.user),
+      user: PrismaUserMapper.toDomainWithRelations(rawServiceProvider.user),
       cnpj: rawServiceProvider.cnpj,
       companyName: rawServiceProvider.companyName,
       coreBusiness: PrismaCoreBusinessMapper.toDomain(
