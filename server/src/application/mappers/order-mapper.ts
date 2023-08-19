@@ -6,20 +6,22 @@ import {
   Service,
   OrderStatus,
 } from '@application/domain';
+import { ServiceProviderMapper } from './service-provider-mapper';
+import { CustomerMapper } from './customer-mapper';
 
 type OrderMapperProperties = Omit<
   Order,
   'customerId' | 'serviceProviderId' | 'selectedAddressId'
 > & {
-  customer: Customer;
-  serviceProvider: ServiceProvider;
+  customer: CustomerMapper;
+  serviceProvider: ServiceProviderMapper;
   selectedAddress: Address;
 };
 
 export class OrderMapper {
   id: string;
-  customer: Customer;
-  serviceProvider: ServiceProvider;
+  customer: CustomerMapper;
+  serviceProvider: ServiceProviderMapper;
   selectedAddress: Address;
   services: Service[];
   price: number;
