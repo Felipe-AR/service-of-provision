@@ -1,6 +1,7 @@
 import { ObjectNotFoundException } from '@application/exceptions';
 import { OrderMapper } from '@application/mappers/order-mapper';
 import { OrderRepository } from '@application/repositories/order/order.repository';
+import { Injectable } from '@nestjs/common';
 
 export interface FindOrderUseCaseRequest {
   id: string;
@@ -10,6 +11,7 @@ export interface FindOrderUseCaseResponse {
   order: OrderMapper;
 }
 
+@Injectable()
 export class FindOrderUseCase {
   constructor(private orderRepository: OrderRepository) {}
 
