@@ -5,6 +5,20 @@ import { Order } from '@application/domain';
 import { PrismaOrderMapper } from '../mappers/prisma-order-mapper';
 import { OrderMapper } from '@application/mappers/order-mapper';
 
+const includeOptions = {
+  customer: { include: { user: { include: { addresses: true } } } },
+  address: true,
+  services: true,
+  serviceProvider: {
+    include: {
+      user: { include: { addresses: true } },
+      coreBusiness: true,
+      services: true,
+      specialities: true,
+    },
+  },
+};
+
 @Injectable()
 export class PrismaOrderRepository implements OrderRepository {
   constructor(private prismaService: PrismaService) {}
@@ -12,12 +26,7 @@ export class PrismaOrderRepository implements OrderRepository {
   async find(id: string): Promise<OrderMapper | null> {
     const order = await this.prismaService.order.findFirst({
       where: { id },
-      include: {
-        customer: true,
-        address: true,
-        services: true,
-        serviceProvider: true,
-      },
+      include: { ...includeOptions },
     });
 
     return PrismaOrderMapper.toDomainWithRelations(order);
@@ -25,12 +34,7 @@ export class PrismaOrderRepository implements OrderRepository {
 
   async findAll(): Promise<OrderMapper[]> {
     const orders = await this.prismaService.order.findMany({
-      include: {
-        customer: true,
-        address: true,
-        services: true,
-        serviceProvider: true,
-      },
+      include: { ...includeOptions },
     });
 
     return orders.map(PrismaOrderMapper.toDomainWithRelations);
@@ -39,12 +43,7 @@ export class PrismaOrderRepository implements OrderRepository {
   async findAllByCustomer(customerId: string): Promise<OrderMapper[]> {
     const orders = await this.prismaService.order.findMany({
       where: { customerUserId: customerId },
-      include: {
-        customer: true,
-        address: true,
-        services: true,
-        serviceProvider: true,
-      },
+      include: { ...includeOptions },
     });
     return orders.map(PrismaOrderMapper.toDomainWithRelations);
   }
@@ -54,12 +53,7 @@ export class PrismaOrderRepository implements OrderRepository {
   ): Promise<OrderMapper[]> {
     const orders = await this.prismaService.order.findMany({
       where: { serviceProviderUserId: serviceProviderId },
-      include: {
-        customer: true,
-        address: true,
-        services: true,
-        serviceProvider: true,
-      },
+      include: { ...includeOptions },
     });
     return orders.map(PrismaOrderMapper.toDomainWithRelations);
   }
@@ -73,12 +67,7 @@ export class PrismaOrderRepository implements OrderRepository {
           connect: order.services.map((service) => ({ id: service.id })),
         },
       },
-      include: {
-        customer: true,
-        address: true,
-        services: true,
-        serviceProvider: true,
-      },
+      include: { ...includeOptions },
     });
 
     return PrismaOrderMapper.toDomainWithRelations(createdOrder);

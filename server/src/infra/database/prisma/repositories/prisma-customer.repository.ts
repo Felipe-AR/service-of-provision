@@ -3,35 +3,45 @@ import { CustomerRepository } from '@application/repositories/customer/customer.
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { PrismaCustomerMapper } from '../mappers/prisma-customer-mapper';
+import { CustomerMapper } from '@application/mappers/customer-mapper';
+
+const includeOptions = {
+  user: { include: { addresses: true } },
+};
 
 @Injectable()
 export class PrismaCustomerRepository implements CustomerRepository {
   constructor(private prismaService: PrismaService) {}
 
-  async findByUser(id: string): Promise<Customer | null> {
+  async findByUser(id: string): Promise<CustomerMapper | null> {
     const customer = await this.prismaService.customer.findFirst({
       where: { userId: id },
+      include: { ...includeOptions },
     });
 
     if (!customer) {
       return null;
     }
 
-    return PrismaCustomerMapper.toDomain(customer);
+    return PrismaCustomerMapper.toDomainWithRelations(customer);
   }
 
-  async findAll(): Promise<Customer[]> {
-    const customers = await this.prismaService.customer.findMany();
-    return customers.map(PrismaCustomerMapper.toDomain);
+  async findAll(): Promise<CustomerMapper[]> {
+    const customers = await this.prismaService.customer.findMany({
+      include: { ...includeOptions },
+    });
+
+    return customers.map(PrismaCustomerMapper.toDomainWithRelations);
   }
 
-  async create(customer: Customer): Promise<Customer> {
+  async create(customer: Customer): Promise<CustomerMapper> {
     const rawCustomer = PrismaCustomerMapper.toPrisma(customer);
     const createdCustomer = await this.prismaService.customer.create({
       data: rawCustomer,
+      include: { ...includeOptions },
     });
 
-    return PrismaCustomerMapper.toDomain(createdCustomer);
+    return PrismaCustomerMapper.toDomainWithRelations(createdCustomer);
   }
 
   async save(customer: Customer): Promise<void> {
