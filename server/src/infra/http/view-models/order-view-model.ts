@@ -1,18 +1,18 @@
 import { OrderMapper } from '@application/mappers/order-mapper';
-import { CustomerDTO } from './customer-view-model';
+import { CustomerDTO, CustomerViewModel } from './customer-view-model';
 import {
   ServiceProviderDTO,
   ServiceProviderViewModel,
 } from './service-provider-view-model';
-import { AddressDTO } from './address-view-model';
+import { AddressDTO, AddressViewModel } from './address-view-model';
 import { ServiceDTO, ServiceViewModel } from './service-view-model';
 import { OrderStatus } from '@application/domain';
 
 export interface OrderDTO {
   id: string;
-  // customer: CustomerDTO;
-  // serviceProvider: ServiceProviderDTO;
-  // selectedAddress: AddressDTO;
+  customer: CustomerDTO;
+  serviceProvider: ServiceProviderDTO;
+  selectedAddress: AddressDTO;
   services: ServiceDTO[];
   price: number;
   status: OrderStatus;
@@ -24,9 +24,9 @@ export class OrderViewModel {
   static toHTTP(order: OrderMapper): OrderDTO {
     return {
       id: order.id,
-      // customer: order.customer,
-      // serviceProvider: ServiceProviderViewModel.toHTTP(order.serviceProvider),
-      // selectedAddress: order.selectedAddress,
+      customer: CustomerViewModel.toHTTP(order.customer),
+      serviceProvider: ServiceProviderViewModel.toHTTP(order.serviceProvider),
+      selectedAddress: AddressViewModel.toHTTP(order.selectedAddress),
       services: order.services.map(ServiceViewModel.toHTTP),
       price: order.price,
       status: order.status,
