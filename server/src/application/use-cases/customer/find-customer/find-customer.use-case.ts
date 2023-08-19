@@ -1,5 +1,6 @@
 import { Customer } from '@application/domain';
 import { ObjectNotFoundException } from '@application/exceptions';
+import { CustomerMapper } from '@application/mappers/customer-mapper';
 import { CustomerRepository } from '@application/repositories';
 import { Injectable } from '@nestjs/common';
 
@@ -8,7 +9,7 @@ export interface FindCustomerUseCaseRequest {
 }
 
 export interface FindCustomerUseCaseResponse {
-  customer: Customer;
+  customer: CustomerMapper;
 }
 
 @Injectable()

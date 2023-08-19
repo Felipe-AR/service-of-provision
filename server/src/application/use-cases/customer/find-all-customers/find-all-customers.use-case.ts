@@ -1,9 +1,10 @@
 import { Customer } from '@application/domain';
+import { CustomerMapper } from '@application/mappers/customer-mapper';
 import { CustomerRepository } from '@application/repositories';
 import { Injectable } from '@nestjs/common';
 
 export interface FindAllCustomersUseCaseResponse {
-  customers: Customer[];
+  customers: CustomerMapper[];
 }
 
 @Injectable()
