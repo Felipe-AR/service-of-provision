@@ -28,6 +28,7 @@ export class AcceptOrderUseCase {
     }
 
     order.status = OrderStatus.ACCEPTED;
+
     await this.orderRepository.save(
       new Order(
         {
