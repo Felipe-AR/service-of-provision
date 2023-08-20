@@ -1,15 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-export interface UserPayload {
-  sub: number;
-  email: string;
-  name: string;
-  iat?: number;
-  exp?: number;
-}
-
 @Injectable()
 export abstract class TokenEncoderAdapter {
-  abstract encoded();
-  abstract decode();
+  abstract encode(payload: any): Promise<string>;
+  abstract decode(token: string): string | Record<string, any>;
 }
