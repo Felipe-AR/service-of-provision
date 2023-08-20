@@ -49,6 +49,9 @@ import { CustomerController } from './controllers/customer.controller';
 import { AcceptOrderUseCase } from '@application/use-cases/order/accept-order/accept-order.use-case';
 import { DenyOrderUseCase } from '@application/use-cases/order/deny-order/deny-order.use-case';
 import { CompleteOrderUseCase } from '@application/use-cases/order/complete-order/complete-order.use-case';
+import { CustomerAnalyticsCountUseCase } from '@application/use-cases/analytics/customer-analytics-count/customer-analytics-count.use-case';
+import { AnalyticsController } from './controllers/analytics.controller';
+import { ServiceProviderAnalyticsCountUseCase } from '@application/use-cases/analytics/service-provider-analytics-count/service-provider-analytics-count.use-case';
 
 @Module({
   imports: [DatabaseModule, SecurityModule],
@@ -62,6 +65,7 @@ import { CompleteOrderUseCase } from '@application/use-cases/order/complete-orde
     ServiceController,
     OrderController,
     CustomerController,
+    AnalyticsController,
   ],
   providers: [
     CreateCategoryUseCase,
@@ -102,6 +106,8 @@ import { CompleteOrderUseCase } from '@application/use-cases/order/complete-orde
     AcceptOrderUseCase,
     DenyOrderUseCase,
     CompleteOrderUseCase,
+    CustomerAnalyticsCountUseCase,
+    ServiceProviderAnalyticsCountUseCase,
   ],
 })
 export class HttpModule {}
