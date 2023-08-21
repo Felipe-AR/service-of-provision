@@ -14,7 +14,7 @@ export class Notification {
   constructor(properties: NotificationProperties, id?: string) {
     this.id = id ?? randomUUID();
     this.properties = {
-      ...this.properties,
+      ...properties,
       createdAt: properties.createdAt ?? new Date(),
     };
   }
@@ -25,6 +25,18 @@ export class Notification {
 
   public set userId(userId: string) {
     this.properties.userId = userId;
+  }
+
+  public get description(): string {
+    return this.properties.description;
+  }
+
+  public set description(description: string) {
+    this.properties.description = description;
+  }
+
+  public get createdAt(): Date {
+    return this.properties.createdAt;
   }
 
   public get readAt(): Date | null | undefined {
