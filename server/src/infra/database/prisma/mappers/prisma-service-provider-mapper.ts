@@ -8,8 +8,8 @@ import {
   Address as RawAddress,
   Speciality as RawSpeciality,
 } from '@prisma/client';
-import { PrismaServiceMapper } from './prisma-service.mapper';
-import { PrismaSpecialityMapper } from './prisma-speciality.mapper';
+import { PrismaServiceMapper } from './prisma-service-mapper';
+import { PrismaSpecialityMapper } from './prisma-speciality-mapper';
 import { PrismaCoreBusinessMapper } from './prisma-core-business-mapper';
 import { PrismaUserMapper, RawUserWithRelations } from './prisma-user-mapper';
 
