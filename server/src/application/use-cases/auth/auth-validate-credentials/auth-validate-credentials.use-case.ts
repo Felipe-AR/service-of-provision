@@ -1,7 +1,7 @@
 import { PasswordEncoderAdapter } from '@application/adapters';
 import { User } from '@application/domain';
 import { FindUserByEmailUseCase } from '@application/use-cases/user/find-user-by-email/find-user-by-email.use-case';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 
 export interface AuthValidateCredentialsUseCaseRequest {
   email: string;
@@ -24,7 +24,7 @@ export class AuthValidateCredentialsUseCase {
     const { user } = await this.findUserByEmailUseCase.execute({ email });
 
     if (!user) {
-      return null;
+      throw new BadRequestException('Credentials are incorrect.');
     }
 
     const match = await this.passwordEncoderAdapter.checkPassword(
