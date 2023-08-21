@@ -1,6 +1,8 @@
+import { Role } from '@application/domain';
 import { CustomerAnalyticsCountUseCase } from '@application/use-cases/analytics/customer-analytics-count/customer-analytics-count.use-case';
 import { ServiceProviderAnalyticsCountUseCase } from '@application/use-cases/analytics/service-provider-analytics-count/service-provider-analytics-count.use-case';
-import { Controller, Get, Param } from '@nestjs/common';
+import { Auth } from '@infra/security/auth/decorators/auth.decorator';
+import { Controller, Get, Param, Request } from '@nestjs/common';
 
 @Controller('analytics')
 export class AnalyticsController {
@@ -9,11 +11,13 @@ export class AnalyticsController {
     private serviceProviderAnalyticsCountUseCase: ServiceProviderAnalyticsCountUseCase,
   ) {}
 
-  @Get('/customer/:userId')
-  async customerAnalyticsCount(@Param(':userId') userId: string) {
-    return this.customerAnalyticsCountUseCase.execute({ userId });
+  @Auth(Role.CUSTOMER)
+  @Get('/customer')
+  async customerAnalyticsCount(@Request() req: any) {
+    return this.customerAnalyticsCountUseCase.execute({ userId: req.user.id });
   }
 
+  @Auth(Role.SERVICE_PROVIDER)
   @Get('/service-provider/:userId')
   async serviceProviderAnalyticsCount(@Param(':userId') userId: string) {
     return this.serviceProviderAnalyticsCountUseCase.execute({ userId });
