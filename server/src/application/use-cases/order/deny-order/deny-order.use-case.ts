@@ -2,6 +2,7 @@ import { OrderRepository } from '@application/repositories/order/order.repositor
 import { FindOrderUseCase } from '../find-order/find-order.use-case';
 import { Order, OrderStatus } from '@application/domain';
 import { ForbiddenException, Injectable } from '@nestjs/common';
+import { SendNotificationUseCase } from '@application/use-cases/notification/send-notification/send-notification.use-case';
 
 export interface DenyOrderUseCaseRequest {
   id: string;
@@ -14,6 +15,7 @@ export class DenyOrderUseCase {
   constructor(
     private orderRepository: OrderRepository,
     private findOrderUseCase: FindOrderUseCase,
+    private sendNotificationUseCase: SendNotificationUseCase,
   ) {}
 
   async execute(
@@ -28,6 +30,7 @@ export class DenyOrderUseCase {
     }
 
     order.status = OrderStatus.DENIED;
+
     await this.orderRepository.save(
       new Order(
         {
@@ -42,5 +45,10 @@ export class DenyOrderUseCase {
         order.id,
       ),
     );
+
+    await this.sendNotificationUseCase.execute({
+      userId: order.customer.user.id,
+      description: `O prestador ${order.serviceProvider.companyName}, recusou o seu pedido com a identificação #${order.id}.`,
+    });
   }
 }

@@ -2,6 +2,7 @@ import { OrderRepository } from '@application/repositories/order/order.repositor
 import { FindOrderUseCase } from '../find-order/find-order.use-case';
 import { Order, OrderStatus } from '@application/domain';
 import { ForbiddenException, Injectable } from '@nestjs/common';
+import { SendNotificationUseCase } from '@application/use-cases/notification/send-notification/send-notification.use-case';
 
 export interface CompleteOrderUseCaseRequest {
   id: string;
@@ -14,6 +15,7 @@ export class CompleteOrderUseCase {
   constructor(
     private orderRepository: OrderRepository,
     private findOrderUseCase: FindOrderUseCase,
+    private sendNotificationUseCase: SendNotificationUseCase,
   ) {}
 
   async execute(
@@ -43,5 +45,10 @@ export class CompleteOrderUseCase {
         order.id,
       ),
     );
+
+    await this.sendNotificationUseCase.execute({
+      userId: order.customer.user.id,
+      description: `O prestador ${order.serviceProvider.companyName}, finalizou o seu pedido com a identificação #${order.id}.`,
+    });
   }
 }

@@ -4,6 +4,7 @@ import { ServiceRepository } from '@application/repositories';
 import { OrderRepository } from '@application/repositories/order/order.repository';
 import { FindAddressUseCase } from '@application/use-cases/address/find-address/find-address.use-case';
 import { FindCustomerUseCase } from '@application/use-cases/customer/find-customer/find-customer.use-case';
+import { SendNotificationUseCase } from '@application/use-cases/notification/send-notification/send-notification.use-case';
 import { FindServiceProviderUseCase } from '@application/use-cases/service-provider/find-service-provider/find-service-provider.use-case';
 import { BadRequestException, Injectable } from '@nestjs/common';
 
@@ -28,6 +29,7 @@ export class CreateOrderUseCase {
     private findCustomerUseCase: FindCustomerUseCase,
     private findServiceProviderUseCase: FindServiceProviderUseCase,
     private findAddressUseCase: FindAddressUseCase,
+    private sendNotificationUseCase: SendNotificationUseCase,
   ) {}
 
   async execute(
@@ -66,6 +68,11 @@ export class CreateOrderUseCase {
     });
 
     const createdOrder = await this.orderRepository.create(order);
+
+    await this.sendNotificationUseCase.execute({
+      userId: createdOrder.serviceProvider.user.id,
+      description: `O cliente ${createdOrder.customer.name} ${createdOrder.customer.surname}, criou um pedido com a identificação #${order.id}.`,
+    });
 
     return { order: createdOrder };
   }
