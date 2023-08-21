@@ -13,9 +13,9 @@ import {
 import {
   PrismaServiceProviderMapper,
   RawServiceProviderWithRelations,
-} from './prisma-service-provider.mapper';
+} from './prisma-service-provider-mapper';
 import { PrismaAddressMapper } from './prisma-address-mapper';
-import { PrismaServiceMapper } from './prisma-service.mapper';
+import { PrismaServiceMapper } from './prisma-service-mapper';
 
 type RawOrderWithRelations = RawOrder & {
   customer: RawCustomerWithRelations;

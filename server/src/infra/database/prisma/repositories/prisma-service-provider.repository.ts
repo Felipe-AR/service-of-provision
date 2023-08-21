@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { ServiceProvider } from '@application/domain/service-provider/service-provider.entity';
 import { PrismaService } from '../prisma.service';
 import { ServiceProviderMapper } from '@application/mappers/service-provider-mapper';
-import { PrismaServiceProviderMapper } from '../mappers/prisma-service-provider.mapper';
+import { PrismaServiceProviderMapper } from '../mappers/prisma-service-provider-mapper';
 import { ServiceProviderRepository } from '@application/repositories';
 
 @Injectable()
