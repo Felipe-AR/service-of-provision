@@ -13,12 +13,18 @@ import { ServiceProviderRepository } from '@application/repositories/service-pro
 import { PrismaServiceProviderRepository } from './prisma/repositories/prisma-service-provider.repository';
 import { CoreBusinessRepository } from '@application/repositories/core-business/core-business.repository';
 import {
+  PrismaClassificationRepository,
   PrismaCoreBusinessRepository,
   PrismaServiceRepository,
 } from './prisma/repositories';
-import { ServiceRepository } from '@application/repositories';
+import {
+  NotificationRepository,
+  ServiceRepository,
+} from '@application/repositories';
 import { OrderRepository } from '@application/repositories/order/order.repository';
 import { PrismaOrderRepository } from './prisma/repositories/prisma-order.repository';
+import { PrismaNotificationRepository } from './prisma/repositories/prisma-notification.repository';
+import { ClassificationRepository } from '@application/repositories/classification/classification.repository';
 
 @Module({
   providers: [
@@ -55,6 +61,14 @@ import { PrismaOrderRepository } from './prisma/repositories/prisma-order.reposi
       provide: OrderRepository,
       useClass: PrismaOrderRepository,
     },
+    {
+      provide: NotificationRepository,
+      useClass: PrismaNotificationRepository,
+    },
+    {
+      provide: ClassificationRepository,
+      useClass: PrismaClassificationRepository,
+    },
   ],
   exports: [
     CategoryRepository,
@@ -65,6 +79,8 @@ import { PrismaOrderRepository } from './prisma/repositories/prisma-order.reposi
     CoreBusinessRepository,
     ServiceRepository,
     OrderRepository,
+    NotificationRepository,
+    ClassificationRepository,
   ],
 })
 export class DatabaseModule {}

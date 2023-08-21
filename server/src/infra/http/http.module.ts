@@ -52,6 +52,16 @@ import { CompleteOrderUseCase } from '@application/use-cases/order/complete-orde
 import { CustomerAnalyticsCountUseCase } from '@application/use-cases/analytics/customer-analytics-count/customer-analytics-count.use-case';
 import { AnalyticsController } from './controllers/analytics.controller';
 import { ServiceProviderAnalyticsCountUseCase } from '@application/use-cases/analytics/service-provider-analytics-count/service-provider-analytics-count.use-case';
+import { ClearNotificationsUseCase } from '@application/use-cases/notification/clear-notifications/clear-notifications.use-case';
+import { FindAllNotificationsByUserUseCase } from '@application/use-cases/notification/find-all-notifications-by-user/find-all-notifications-by-user.use-case';
+import { FindAllNotificationsUseCase } from '@application/use-cases/notification/find-all-notifications/find-all-notifications.use-case';
+import { ReadNotificationUseCase } from '@application/use-cases/notification/read-notification/read-notification.use-case';
+import { UnreadNotificationUseCase } from '@application/use-cases/notification/unread-notification/unread-notification.use-case';
+import { NotificationController } from './controllers/notification.controller';
+import { SendNotificationUseCase } from '@application/use-cases/notification/send-notification/send-notification.use-case';
+import { SendClassificationUseCase } from '@application/use-cases/classification/send-classification/send-classification.use-case';
+import { ClassificationController } from './controllers/classification.controller';
+import { AverageUserScoreUseCase } from '@application/use-cases/classification/average-user-score/average-user-score.use-case';
 
 @Module({
   imports: [DatabaseModule, SecurityModule],
@@ -66,6 +76,8 @@ import { ServiceProviderAnalyticsCountUseCase } from '@application/use-cases/ana
     OrderController,
     CustomerController,
     AnalyticsController,
+    NotificationController,
+    ClassificationController,
   ],
   providers: [
     CreateCategoryUseCase,
@@ -108,6 +120,14 @@ import { ServiceProviderAnalyticsCountUseCase } from '@application/use-cases/ana
     CompleteOrderUseCase,
     CustomerAnalyticsCountUseCase,
     ServiceProviderAnalyticsCountUseCase,
+    FindAllNotificationsUseCase,
+    FindAllNotificationsByUserUseCase,
+    SendNotificationUseCase,
+    ReadNotificationUseCase,
+    UnreadNotificationUseCase,
+    ClearNotificationsUseCase,
+    SendClassificationUseCase,
+    AverageUserScoreUseCase,
   ],
 })
 export class HttpModule {}
