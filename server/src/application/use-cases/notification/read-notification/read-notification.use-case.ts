@@ -19,7 +19,7 @@ export class ReadNotificationUseCase {
     const notification = await this.notificationRepository.find(id);
 
     if (!notification) {
-      throw new ObjectNotFoundException('Notification was not found.');
+      throw new ObjectNotFoundException('A notificação não foi encontrada.');
     }
 
     notification.read();

@@ -23,7 +23,7 @@ export class FindCustomerUseCase {
     const customer = await this.customerRepository.findByUser(userId);
 
     if (!customer) {
-      throw new ObjectNotFoundException('Customer was not found.');
+      throw new ObjectNotFoundException('O cliente não foi encontrado.');
     }
 
     return { customer };

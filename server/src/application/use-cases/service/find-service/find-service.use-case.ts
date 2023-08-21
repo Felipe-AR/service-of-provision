@@ -22,7 +22,7 @@ export class FindServiceUseCase {
     const service = await this.serviceRepository.find(id);
 
     if (!service) {
-      throw new ObjectNotFoundException('Service was not found.');
+      throw new ObjectNotFoundException('O serviço não foi encontrado.');
     }
 
     return { service };

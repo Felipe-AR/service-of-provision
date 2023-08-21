@@ -22,7 +22,9 @@ export class FindServiceProviderUseCase {
     );
 
     if (!serviceProvider) {
-      throw new ObjectNotFoundException('Service Provider was not found.');
+      throw new ObjectNotFoundException(
+        'O prestador de serviço não foi encontrado.',
+      );
     }
 
     return { serviceProvider };

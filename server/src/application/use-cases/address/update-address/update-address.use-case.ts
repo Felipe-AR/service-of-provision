@@ -29,7 +29,7 @@ export class UpdateAddressUseCase {
     const address = await this.addressRepository.findById(id);
 
     if (!address) {
-      throw new ObjectNotFoundException('This address was not found');
+      throw new ObjectNotFoundException('O endereço não foi encontrado.');
     }
 
     await this.addressRepository.save(

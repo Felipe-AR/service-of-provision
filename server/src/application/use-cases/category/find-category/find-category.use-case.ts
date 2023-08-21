@@ -23,7 +23,7 @@ export class FindCategoryUseCase {
     const category = await this.categoryRepository.findById(id);
 
     if (!category) {
-      throw new ObjectNotFoundException('Category was not found');
+      throw new ObjectNotFoundException('A categoria não foi encontrada.');
     }
 
     return { category };

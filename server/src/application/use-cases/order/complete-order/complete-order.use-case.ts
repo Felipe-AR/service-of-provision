@@ -26,7 +26,9 @@ export class CompleteOrderUseCase {
     const { order } = await this.findOrderUseCase.execute({ id });
 
     if (order.status !== OrderStatus.ACCEPTED) {
-      throw new ForbiddenException('Order currently cannot be completed.');
+      throw new ForbiddenException(
+        'Atualmente o pedido não pode ser alterado.',
+      );
     }
 
     order.status = OrderStatus.COMPLETED;

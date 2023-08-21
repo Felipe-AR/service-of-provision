@@ -26,7 +26,9 @@ export class DenyOrderUseCase {
     const { order } = await this.findOrderUseCase.execute({ id });
 
     if (order.status !== OrderStatus.CREATED) {
-      throw new ForbiddenException('Order currently cannot be changed.');
+      throw new ForbiddenException(
+        'Atualmente o pedido não pode ser alterado.',
+      );
     }
 
     order.status = OrderStatus.DENIED;

@@ -23,7 +23,7 @@ export class UpdateCategoryUseCase {
     const category = await this.categoryRepository.findById(id);
 
     if (!category) {
-      throw new ObjectNotFoundException('This category was not found');
+      throw new ObjectNotFoundException('A categoria não foi encontrada.');
     }
 
     await this.categoryRepository.save(

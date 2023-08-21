@@ -22,7 +22,7 @@ export class FindUserUseCase {
     const user = await this.userRepository.find(id);
 
     if (!user) {
-      throw new ObjectNotFoundException('User was not found.');
+      throw new ObjectNotFoundException('O usuário não foi encontrado.');
     }
 
     return { user };

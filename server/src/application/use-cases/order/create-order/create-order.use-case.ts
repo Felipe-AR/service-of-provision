@@ -51,7 +51,7 @@ export class CreateOrderUseCase {
 
     if (services.length === 0) {
       throw new BadRequestException(
-        'Selected services must be greater than or equals one',
+        'A quantidade de serviços selecionados devem ser maiores ou iguais a um.',
       );
     }
 

@@ -22,7 +22,7 @@ export class FindOrderUseCase {
     const order = await this.orderRepository.find(id);
 
     if (!order) {
-      throw new ObjectNotFoundException('Order was not found.');
+      throw new ObjectNotFoundException('O pedido não foi encontrado.');
     }
 
     return { order };

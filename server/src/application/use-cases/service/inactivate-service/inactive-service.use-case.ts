@@ -24,7 +24,7 @@ export class InactivateServiceUseCase {
 
     if (service.status === ServiceStatus.BLOCKED) {
       throw new ForbiddenException(
-        'Service is currently blocked and cannot be activated.',
+        'Atualmente o serviço está bloqueado e não pode ser alterado.',
       );
     }
 

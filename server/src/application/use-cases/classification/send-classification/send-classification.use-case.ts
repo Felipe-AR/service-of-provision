@@ -46,7 +46,7 @@ export class SendClassificationUseCase {
     });
 
     if (order.status !== OrderStatus.COMPLETED) {
-      throw new BadRequestException('Classification cannot be submitted.');
+      throw new BadRequestException('A classificação não pode ser enviada.');
     }
 
     const userClassificationRatedId =

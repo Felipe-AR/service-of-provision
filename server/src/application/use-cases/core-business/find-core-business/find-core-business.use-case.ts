@@ -24,7 +24,9 @@ export class FindCoreBusinessUseCase {
     const coreBusiness = await this.coreBusinessRepository.find(id);
 
     if (!coreBusiness) {
-      throw new ObjectNotFoundException('Core business was not found.');
+      throw new ObjectNotFoundException(
+        'O ramo de atividade não foi encontrado.',
+      );
     }
 
     return { coreBusiness };

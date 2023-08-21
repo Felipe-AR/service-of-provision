@@ -39,7 +39,7 @@ export class UpdateServiceUseCase {
     });
 
     if (!service) {
-      throw new ObjectNotFoundException('This service was not found.');
+      throw new ObjectNotFoundException('O serviço não foi encontrado.');
     }
 
     await this.serviceRepository.save(
