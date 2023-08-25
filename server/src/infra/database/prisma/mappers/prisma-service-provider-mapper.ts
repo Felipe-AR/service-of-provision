@@ -6,6 +6,7 @@ import {
   CoreBusiness as RawCoreBusiness,
   Service as RawService,
   Address as RawAddress,
+  Category as RawCategory,
   Speciality as RawSpeciality,
 } from '@prisma/client';
 import { PrismaServiceMapper } from './prisma-service-mapper';
@@ -16,7 +17,7 @@ import { PrismaUserMapper, RawUserWithRelations } from './prisma-user-mapper';
 export type RawServiceProviderWithRelations = RawServiceProvider & {
   user: RawUserWithRelations;
   coreBusiness: RawCoreBusiness;
-  services: RawService[];
+  services: (RawService & { category: RawCategory })[];
   specialities: RawSpeciality[];
 };
 
@@ -51,7 +52,9 @@ export class PrismaServiceProviderMapper {
       coreBusiness: PrismaCoreBusinessMapper.toDomain(
         rawServiceProvider.coreBusiness,
       ),
-      services: rawServiceProvider.services.map(PrismaServiceMapper.toDomain),
+      services: rawServiceProvider.services.map(
+        PrismaServiceMapper.toDomainWithRelations,
+      ),
       specialities: rawServiceProvider.specialities.map(
         PrismaSpecialityMapper.toDomain,
       ),
