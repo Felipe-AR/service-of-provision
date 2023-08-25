@@ -27,7 +27,7 @@ export class AcceptOrderUseCase {
 
     if (order.status !== OrderStatus.CREATED) {
       throw new ForbiddenException(
-        'Atualmente o pedidod não pode ser alterado.',
+        'Atualmente o pedido não pode ser alterado.',
       );
     }
 
