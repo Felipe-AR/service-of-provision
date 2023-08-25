@@ -37,6 +37,21 @@ export class SendClassificationUseCase {
       updatedAt,
     } = request;
 
+    const classificationsByOrder =
+      await this.classificationRepository.findAllByOrder(orderId);
+
+    const userAlreadySubmittedClassification = classificationsByOrder.some(
+      (classification) =>
+        classification.userClassificationCreatedId ===
+        userClassificationCreatedId,
+    );
+
+    if (userAlreadySubmittedClassification) {
+      throw new BadRequestException(
+        'O usuário já enviou a classificação deste pedido.',
+      );
+    }
+
     const { user } = await this.findUserUseCase.execute({
       id: userClassificationCreatedId,
     });

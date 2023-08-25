@@ -27,13 +27,17 @@ export class AuthValidateCredentialsUseCase {
     const { email, password } = request;
     const { user } = await this.findUserByEmailUseCase.execute({ email });
 
+    if (!user) {
+      throw new BadRequestException('As credenciais estão inválidas.');
+    }
+
     const match = await this.passwordEncoderAdapter.checkPassword(
       password,
       user.password,
     );
 
     if (!match) {
-      throw new BadRequestException('As credenciais estao inválidas.');
+      throw new BadRequestException('As credenciais estão inválidas.');
     }
 
     return { user };
