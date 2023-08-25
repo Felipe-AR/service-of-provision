@@ -1,6 +1,10 @@
 import { ServiceProviderMapper } from '@application/mappers/service-provider-mapper';
 import { SpecialityDTO, SpecialityViewModel } from './speciality-view-model';
-import { ServiceDTO, ServiceViewModel } from './service-view-model';
+import {
+  ServiceDTO,
+  ServiceMapperDTO,
+  ServiceViewModel,
+} from './service-view-model';
 import {
   CoreBusinessDTO,
   CoreBusinessViewModel,
@@ -13,7 +17,7 @@ export interface ServiceProviderDTO {
   companyName: string;
   cnpj: string;
   specialities: SpecialityDTO[];
-  services: ServiceDTO[];
+  services: ServiceMapperDTO[];
 }
 
 export class ServiceProviderViewModel {
@@ -26,7 +30,7 @@ export class ServiceProviderViewModel {
       specialities: serviceProvider.specialities.map(
         SpecialityViewModel.toHTTP,
       ),
-      services: serviceProvider.services.map(ServiceViewModel.toHTTP),
+      services: serviceProvider.services.map(ServiceViewModel.mapperToHTTP),
     };
   }
 }
