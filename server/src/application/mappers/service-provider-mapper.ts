@@ -5,18 +5,19 @@ import {
   ServiceProvider,
   User,
 } from '@application/domain';
+import { ServiceMapper } from './service.mapper';
 
 type ServiceProviderMapperProperties = Omit<
   ServiceProvider,
-  'coreBusinessId' | 'userId'
-> & { user: User; coreBusiness: CoreBusiness };
+  'coreBusinessId' | 'userId' | 'services'
+> & { user: User; coreBusiness: CoreBusiness; services: ServiceMapper[] };
 
 export class ServiceProviderMapper {
   user: User;
   coreBusiness: CoreBusiness;
   companyName: string;
   cnpj: string;
-  services: Service[];
+  services: ServiceMapper[];
   specialities: Speciality[];
 
   constructor(properties: ServiceProviderMapperProperties) {
