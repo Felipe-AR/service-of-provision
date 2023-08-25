@@ -13,7 +13,7 @@ const includeOptions = {
     include: {
       user: { include: { addresses: true } },
       coreBusiness: true,
-      services: true,
+      services: { include: { category: true } },
       specialities: true,
     },
   },

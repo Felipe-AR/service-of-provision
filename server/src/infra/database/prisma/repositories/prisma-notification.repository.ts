@@ -24,6 +24,7 @@ export class PrismaNotificationRepository implements NotificationRepository {
   async findAllByUserId(userId: string): Promise<Notification[]> {
     const notifications = await this.prismaService.notification.findMany({
       where: { userId },
+      orderBy: { createdAt: 'desc' },
     });
     return notifications.map(PrismaNotificationMapper.toDomain);
   }

@@ -6,6 +6,17 @@ import { ServiceProviderMapper } from '@application/mappers/service-provider-map
 import { PrismaServiceProviderMapper } from '../mappers/prisma-service-provider-mapper';
 import { ServiceProviderRepository } from '@application/repositories';
 
+const includeOptions = {
+  user: { include: { addresses: true } },
+  coreBusiness: true,
+  specialities: true,
+  services: {
+    include: {
+      category: true,
+    },
+  },
+};
+
 @Injectable()
 export class PrismaServiceProviderRepository
   implements ServiceProviderRepository
@@ -15,12 +26,7 @@ export class PrismaServiceProviderRepository
   async findByUser(userId: string): Promise<ServiceProviderMapper | null> {
     const serviceProvider = await this.prismaService.serviceProvider.findFirst({
       where: { userId },
-      include: {
-        user: { include: { addresses: true } },
-        coreBusiness: true,
-        specialities: true,
-        services: true,
-      },
+      include: includeOptions,
     });
 
     if (!serviceProvider) {
@@ -32,12 +38,7 @@ export class PrismaServiceProviderRepository
 
   async findAll(): Promise<ServiceProviderMapper[]> {
     const serviceProviders = await this.prismaService.serviceProvider.findMany({
-      include: {
-        user: { include: { addresses: true } },
-        coreBusiness: true,
-        specialities: true,
-        services: true,
-      },
+      include: includeOptions,
     });
 
     return serviceProviders.map(
@@ -54,12 +55,7 @@ export class PrismaServiceProviderRepository
     const createdServiceProvider =
       await this.prismaService.serviceProvider.create({
         data: { ...rawServiceProvider },
-        include: {
-          user: { include: { addresses: true } },
-          coreBusiness: true,
-          specialities: true,
-          services: true,
-        },
+        include: includeOptions,
       });
 
     return PrismaServiceProviderMapper.toDomainWithRelations(

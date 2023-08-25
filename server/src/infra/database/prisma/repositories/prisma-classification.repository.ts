@@ -21,6 +21,13 @@ export class PrismaClassificationRepository
     return classifications.map(PrismaClassificationMapper.toDomain);
   }
 
+  async findAllByOrder(orderId: string): Promise<Classification[]> {
+    const classifications = await this.prismaService.classification.findMany({
+      where: { orderId },
+    });
+    return classifications.map(PrismaClassificationMapper.toDomain);
+  }
+
   async create(classification: Classification): Promise<Classification> {
     const rawClassification =
       PrismaClassificationMapper.toPrisma(classification);

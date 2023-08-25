@@ -45,7 +45,7 @@ export class PrismaCustomerRepository implements CustomerRepository {
   }
 
   async save(customer: Customer): Promise<void> {
-    const rawCustomer = PrismaCustomerMapper.toDomain(customer);
+    const rawCustomer = PrismaCustomerMapper.toPrisma(customer);
     await this.prismaService.customer.update({
       where: { userId: rawCustomer.userId },
       data: { ...rawCustomer },
