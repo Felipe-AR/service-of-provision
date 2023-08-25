@@ -1,15 +1,6 @@
-import {
-  ArrayMinSize,
-  IsArray,
-  IsNotEmpty,
-  IsUUID,
-  ValidateNested,
-} from 'class-validator';
+import { ArrayMinSize, IsArray, IsUUID } from 'class-validator';
 
 export class CreateOrderForm {
-  @IsUUID()
-  customerId: string;
-
   @IsUUID()
   serviceProviderId: string;
 

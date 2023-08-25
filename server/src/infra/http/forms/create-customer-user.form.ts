@@ -1,6 +1,6 @@
 import { Gender } from '@application/domain/customer/gender.enum';
 import { IsEmail, IsNotEmpty } from 'class-validator';
-import { AddressForm } from './address.form';
+import { CreateAddressForm } from './create-address.form';
 
 export class CreateCustomerUserForm {
   @IsEmail()
@@ -27,5 +27,5 @@ export class CreateCustomerUserForm {
   @IsNotEmpty()
   cpf: string;
 
-  address: Omit<AddressForm, 'userId'>;
+  address: CreateAddressForm;
 }

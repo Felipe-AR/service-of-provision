@@ -1,10 +1,6 @@
-import { IsNotEmpty, IsUUID } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
-export class AddressForm {
-  @IsUUID()
-  @IsNotEmpty()
-  userId: string;
-
+export class CreateAddressForm {
   @IsNotEmpty()
   street: string;
 

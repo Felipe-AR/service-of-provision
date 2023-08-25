@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { AddressForm } from './address.form';
+import { CreateAddressForm } from './create-address.form';
 
 export class CreateServiceProviderUserForm {
   @IsNotEmpty()
@@ -20,5 +20,5 @@ export class CreateServiceProviderUserForm {
   @IsNotEmpty()
   phone: string;
 
-  address: Omit<AddressForm, 'userId'>;
+  address: CreateAddressForm;
 }
