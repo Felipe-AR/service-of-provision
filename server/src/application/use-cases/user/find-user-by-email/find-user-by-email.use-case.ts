@@ -1,5 +1,4 @@
 import { User } from '@application/domain';
-import { ObjectNotFoundException } from '@application/exceptions';
 import { UserRepository } from '@application/repositories';
 import { Injectable } from '@nestjs/common';
 
@@ -20,6 +19,11 @@ export class FindUserByEmailUseCase {
   ): Promise<FindUserByEmailUseCaseResponse> {
     const { email } = request;
     const user = await this.userRepository.findByEmail(email);
+
+    if (!user) {
+      return { user: null };
+    }
+
     return { user };
   }
 }
