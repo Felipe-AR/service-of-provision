@@ -5,6 +5,7 @@ import {
   ServiceProviderViewModel,
 } from '../view-models/service-provider-view-model';
 import { FindServiceProviderUseCase } from '@application/use-cases/service-provider/find-service-provider/find-service-provider.use-case';
+import { Auth } from '@infra/security/auth/decorators/auth.decorator';
 
 @Controller('service-provider')
 export class ServiceProviderController {
@@ -14,7 +15,8 @@ export class ServiceProviderController {
   ) {}
 
   @Get()
-  public async findAllServiceProviders(): Promise<ServiceProviderDTO[] | any> {
+  @Auth()
+  public async findAllServiceProviders(): Promise<ServiceProviderDTO[]> {
     const { serviceProviders } =
       await this.findAllServiceProvidersUseCase.execute();
 
@@ -22,6 +24,7 @@ export class ServiceProviderController {
   }
 
   @Get(':id')
+  @Auth()
   public async findServiceProvider(
     @Param('userId') userId: string,
   ): Promise<ServiceProviderDTO> {

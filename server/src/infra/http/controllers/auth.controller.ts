@@ -9,17 +9,15 @@ import { Role } from '@application/domain';
 export class AuthController {
   constructor(private authSignInUseCase: AuthSignInUseCase) {}
 
-  @Post('login')
+  @Post('sign-in')
   @UseGuards(LocalAuthGuard)
-  public async login(@Request() request: any) {
+  public async signIn(@Request() request: any) {
     return this.authSignInUseCase.execute({ user: request.user });
   }
 
   @Get('/check-connection')
   @Auth()
   public async checkConnection(@Request() request: any) {
-    return {
-      payload: request.user,
-    };
+    return request.user;
   }
 }
