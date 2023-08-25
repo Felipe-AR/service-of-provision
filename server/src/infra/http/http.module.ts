@@ -62,6 +62,11 @@ import { SendNotificationUseCase } from '@application/use-cases/notification/sen
 import { SendClassificationUseCase } from '@application/use-cases/classification/send-classification/send-classification.use-case';
 import { ClassificationController } from './controllers/classification.controller';
 import { AverageUserScoreUseCase } from '@application/use-cases/classification/average-user-score/average-user-score.use-case';
+import { ChangePasswordUseCase } from '@application/use-cases/user/change-password/change-password.use-case';
+import { UpdateCustomerUseCase } from '@application/use-cases/customer/update-customer/update-customer.use-case';
+import { UpdateServiceProviderUseCase } from '@application/use-cases/service-provider/update-service-provider/update-service-provider.use-case';
+import { UpdateServiceProviderUserUseCase } from '@application/use-cases/user/update-service-provider-user/update-service-provider-user.use-case';
+import { UpdateCustomerUserUseCase } from '@application/use-cases/user/update-customer-user/update-customer-user.use-case';
 
 @Module({
   imports: [DatabaseModule, SecurityModule],
@@ -128,6 +133,11 @@ import { AverageUserScoreUseCase } from '@application/use-cases/classification/a
     ClearNotificationsUseCase,
     SendClassificationUseCase,
     AverageUserScoreUseCase,
+    ChangePasswordUseCase,
+    UpdateCustomerUseCase,
+    UpdateServiceProviderUseCase,
+    UpdateCustomerUserUseCase,
+    UpdateServiceProviderUserUseCase,
   ],
 })
 export class HttpModule {}
