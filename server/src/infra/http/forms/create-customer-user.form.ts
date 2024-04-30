@@ -1,6 +1,14 @@
 import { Gender } from '@application/domain/customer/gender.enum';
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import {
+  IsDefined,
+  IsEmail,
+  IsNotEmpty,
+  IsNotEmptyObject,
+  IsObject,
+  ValidateNested,
+} from 'class-validator';
 import { CreateAddressForm } from './create-address.form';
+import { Type } from 'class-transformer';
 
 export class CreateCustomerUserForm {
   @IsEmail()
@@ -27,5 +35,10 @@ export class CreateCustomerUserForm {
   @IsNotEmpty()
   cpf: string;
 
+  @IsDefined()
+  @IsNotEmptyObject()
+  @IsObject()
+  @ValidateNested()
+  @Type(() => CreateAddressForm)
   address: CreateAddressForm;
 }
