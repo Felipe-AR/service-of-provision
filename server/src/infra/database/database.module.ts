@@ -25,6 +25,8 @@ import { OrderRepository } from '@application/repositories/order/order.repositor
 import { PrismaOrderRepository } from './prisma/repositories/prisma-order.repository';
 import { PrismaNotificationRepository } from './prisma/repositories/prisma-notification.repository';
 import { ClassificationRepository } from '@application/repositories/classification/classification.repository';
+import { SpecialityRepository } from '@application/repositories/speciality/speciality.repository';
+import { PrismaSpecialityRepository } from './prisma/repositories/prisma-speciality.repository';
 
 @Module({
   providers: [
@@ -69,6 +71,10 @@ import { ClassificationRepository } from '@application/repositories/classificati
       provide: ClassificationRepository,
       useClass: PrismaClassificationRepository,
     },
+    {
+      provide: SpecialityRepository,
+      useClass: PrismaSpecialityRepository,
+    },
   ],
   exports: [
     CategoryRepository,
@@ -81,6 +87,7 @@ import { ClassificationRepository } from '@application/repositories/classificati
     OrderRepository,
     NotificationRepository,
     ClassificationRepository,
+    SpecialityRepository,
   ],
 })
 export class DatabaseModule {}
