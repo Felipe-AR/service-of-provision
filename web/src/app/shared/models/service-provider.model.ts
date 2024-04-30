@@ -1,10 +1,10 @@
-import { CoreBusiness, Service, Speciality } from ".";
+import { CoreBusiness, Service, Speciality, User } from '.';
 
 export class ServiceProvider {
-  id: string;
+  user: User;
+  coreBusiness: CoreBusiness;
   companyName: string;
   cnpj: string;
-  coreBusiness: CoreBusiness;
-  speciality: Speciality[];
+  specialities: Speciality[];
   services: Service[];
 }
