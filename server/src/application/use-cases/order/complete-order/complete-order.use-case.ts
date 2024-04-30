@@ -42,7 +42,6 @@ export class CompleteOrderUseCase {
           price: order.price,
           status: order.status,
           createdAt: order.createdAt,
-          updatedAt: order.updatedAt,
         },
         order.id,
       ),
