@@ -20,9 +20,12 @@ import {
   Patch,
   Post,
   Put,
+  Request,
 } from '@nestjs/common';
 import { CreateServiceForm } from '../forms/create-service.form';
 import { UpdateServiceForm } from '../forms/update-service.form';
+import { Auth } from '@infra/security/auth/decorators/auth.decorator';
+import { Role } from '@application/domain';
 
 @Controller('service')
 export class ServiceController {
@@ -51,36 +54,50 @@ export class ServiceController {
   }
 
   @Post()
+  @Auth(Role.SERVICE_PROVIDER)
   @HttpCode(HttpStatus.CREATED)
   public async createService(
     @Body() form: CreateServiceForm,
+    @Request() req: any,
   ): Promise<ServiceDTO> {
-    const { service } = await this.createServiceUseCase.execute(form);
+    const { service } = await this.createServiceUseCase.execute({
+      ...form,
+      serviceProviderId: req.user.id,
+    });
     return ServiceViewModel.toHTTP(service);
   }
 
   @Put(':id')
+  @Auth(Role.SERVICE_PROVIDER)
   @HttpCode(HttpStatus.NO_CONTENT)
   public async updateService(
     @Param('id') id: string,
     @Body() form: UpdateServiceForm,
+    @Request() req: any,
   ): Promise<void> {
-    await this.updateServiceUseCase.execute({ id, ...form });
+    await this.updateServiceUseCase.execute({
+      id,
+      ...form,
+      serviceProviderId: req.user.id,
+    });
   }
 
   @Patch(':id/activate')
+  @Auth(Role.SERVICE_PROVIDER)
   @HttpCode(HttpStatus.NO_CONTENT)
   public async activateService(@Param('id') id: string): Promise<void> {
     await this.activateServiceUseCase.execute({ id });
   }
 
   @Patch(':id/inactivate')
+  @Auth(Role.SERVICE_PROVIDER)
   @HttpCode(HttpStatus.NO_CONTENT)
   public async deactivateService(@Param('id') id: string): Promise<void> {
     await this.inactivateServiceUseCase.execute({ id });
   }
 
   @Delete(':id/block')
+  @Auth(Role.ADMINISTRATOR)
   @HttpCode(HttpStatus.NO_CONTENT)
   public async blockService(@Param('id') id: string): Promise<void> {
     await this.blockServiceUseCase.execute({ id });
