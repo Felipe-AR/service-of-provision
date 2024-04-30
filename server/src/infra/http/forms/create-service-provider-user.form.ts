@@ -1,5 +1,12 @@
-import { IsNotEmpty } from 'class-validator';
+import {
+  IsDefined,
+  IsNotEmpty,
+  IsNotEmptyObject,
+  IsObject,
+  ValidateNested,
+} from 'class-validator';
 import { CreateAddressForm } from './create-address.form';
+import { Type } from 'class-transformer';
 
 export class CreateServiceProviderUserForm {
   @IsNotEmpty()
@@ -20,5 +27,10 @@ export class CreateServiceProviderUserForm {
   @IsNotEmpty()
   phone: string;
 
+  @IsDefined()
+  @IsNotEmptyObject()
+  @IsObject()
+  @ValidateNested()
+  @Type(() => CreateAddressForm)
   address: CreateAddressForm;
 }
