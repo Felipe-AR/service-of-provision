@@ -27,6 +27,7 @@ export class PrismaOrderRepository implements OrderRepository {
     const order = await this.prismaService.order.findFirst({
       where: { id },
       include: { ...includeOptions },
+      orderBy: [{ createdAt: 'desc' }, { status: 'desc' }],
     });
 
     return PrismaOrderMapper.toDomainWithRelations(order);
@@ -35,6 +36,7 @@ export class PrismaOrderRepository implements OrderRepository {
   async findAll(): Promise<OrderMapper[]> {
     const orders = await this.prismaService.order.findMany({
       include: { ...includeOptions },
+      orderBy: [{ createdAt: 'desc' }, { status: 'desc' }],
     });
 
     return orders.map(PrismaOrderMapper.toDomainWithRelations);
@@ -44,6 +46,7 @@ export class PrismaOrderRepository implements OrderRepository {
     const orders = await this.prismaService.order.findMany({
       where: { customerUserId: customerId },
       include: { ...includeOptions },
+      orderBy: [{ createdAt: 'desc' }, { status: 'desc' }],
     });
     return orders.map(PrismaOrderMapper.toDomainWithRelations);
   }
@@ -54,6 +57,7 @@ export class PrismaOrderRepository implements OrderRepository {
     const orders = await this.prismaService.order.findMany({
       where: { serviceProviderUserId: serviceProviderId },
       include: { ...includeOptions },
+      orderBy: [{ createdAt: 'desc' }, { status: 'desc' }],
     });
     return orders.map(PrismaOrderMapper.toDomainWithRelations);
   }
