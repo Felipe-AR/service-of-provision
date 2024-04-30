@@ -12,10 +12,13 @@ export class PrismaSpecialityMapper {
   }
 
   static toDomain(rawSpeciality: RawSpeciality): Speciality {
-    return new Speciality({
-      name: rawSpeciality.name,
-      serviceProviderId: rawSpeciality.serviceProviderUserId,
-      description: rawSpeciality.description,
-    });
+    return new Speciality(
+      {
+        name: rawSpeciality.name,
+        serviceProviderId: rawSpeciality.serviceProviderUserId,
+        description: rawSpeciality.description,
+      },
+      rawSpeciality.id,
+    );
   }
 }
