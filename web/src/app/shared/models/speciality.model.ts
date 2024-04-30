@@ -1,7 +1,6 @@
-import { ServiceProvider } from ".";
-
 export class Speciality {
-  serviceProvider: ServiceProvider;
+  id: string;
+  serviceProviderId: string;
   name: string;
   description: string;
 }
