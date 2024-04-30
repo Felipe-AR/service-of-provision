@@ -67,6 +67,12 @@ import { UpdateCustomerUseCase } from '@application/use-cases/customer/update-cu
 import { UpdateServiceProviderUseCase } from '@application/use-cases/service-provider/update-service-provider/update-service-provider.use-case';
 import { UpdateServiceProviderUserUseCase } from '@application/use-cases/user/update-service-provider-user/update-service-provider-user.use-case';
 import { UpdateCustomerUserUseCase } from '@application/use-cases/user/update-customer-user/update-customer-user.use-case';
+import { SpecialityController } from './controllers/speciality.controller';
+import { CreateSpecialityUseCase } from '@application/use-cases/speciality/create-speciality/create-speciality.use-case';
+import { DeleteSpecialityUseCase } from '@application/use-cases/speciality/delete-speciality/delete-speciality.use-case';
+import { FindAllSpecialitiesByUserUseCase } from '@application/use-cases/speciality/find-all-specialities-by-user/find-all-specialities-by-user.use-case';
+import { FindSpecialityUseCase } from '@application/use-cases/speciality/find-speciality/find-speciality.use-case';
+import { UpdateSpecialityUseCase } from '@application/use-cases/speciality/update-speciality/update-speciality.use-case';
 
 @Module({
   imports: [DatabaseModule, SecurityModule],
@@ -83,6 +89,7 @@ import { UpdateCustomerUserUseCase } from '@application/use-cases/user/update-cu
     AnalyticsController,
     NotificationController,
     ClassificationController,
+    SpecialityController,
   ],
   providers: [
     CreateCategoryUseCase,
@@ -138,6 +145,11 @@ import { UpdateCustomerUserUseCase } from '@application/use-cases/user/update-cu
     UpdateServiceProviderUseCase,
     UpdateCustomerUserUseCase,
     UpdateServiceProviderUserUseCase,
+    CreateSpecialityUseCase,
+    DeleteSpecialityUseCase,
+    FindAllSpecialitiesByUserUseCase,
+    FindSpecialityUseCase,
+    UpdateSpecialityUseCase,
   ],
 })
 export class HttpModule {}
