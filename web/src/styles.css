@@ -30,3 +30,7 @@
 .po-accordion-item-header-button.po-clickable::before {
   display: none;
 }
+
+po-widget {
+  background: #FFF;
+} 
